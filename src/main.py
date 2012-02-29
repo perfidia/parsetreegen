@@ -5,6 +5,8 @@ Created on Apr 29, 2011
 '''
 
 import parsetreegen
+#from svgcreator import SVGCreator
+import svgcreator
 
 nodeL1C1SA2 = {
 		'type': 'node',
@@ -152,3 +154,7 @@ nodeRoot = {
 print nodeL1C1SB2
 
 print parsetreegen.as_text(nodeRoot)
+
+svgCreator = svgcreator.SVGCreator()
+svgCreator.prepareNodeHeader("Test node")
+svgCreator.createSVGFile("testFile.svg")
