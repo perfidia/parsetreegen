@@ -67,43 +67,14 @@ def as_svg(data, filename = None, conf = None):
 	@return: SVG representation of file
 	'''
 	if conf != None:
-		svgCreator = svgcreator.SVGCreator(conf)
+		svgCreator = svgcreator.SVGTreeCreator(conf)
 	else:
-		svgCreator = svgcreator.SVGCreator(defaultConf)
-	svgCreator.prepareNode(data)
+		svgCreator = svgcreator.SVGTreeCreator(defaultConf)
+	svgCreator.prepareTree(data)
 	if filename != None:
 		svgCreator.createSVGFile(filename)
 	
-	return svgCreator.prepareXML()
-
-def determineTreeWidth(data, level = 1, result = None):
-	'''
-	Counts nodes on each depth level.
-
-	@param data: root node of tree or subtree
-	@param level: depth level of node investigated currently
-	@param result: dictionary with with levels as keys and number of nodes on this level as values
-
-	@return: updated result
-	'''
-	
-	if result == None:
-		result = dict()
-		result[1] = 1
-		
-	if level != 1:
-		if result.__contains__(level):
-			result[level] += 1
-		else:
-			result[level] = 1
-			
-	if data['type'] == 'node':
-		if data.has_key('children'):
-			for child in data['children']:
-				result = determineTreeWidth(child, level + 1, result)
-							
-	return result
-				
+	return svgCreator.prepareXML()				
 
 def __partial(data, indent, nodes):
 	result = ''

@@ -150,6 +150,5 @@ nodeRoot = {
 }
 
 print nodeRoot
-print 'determineTreeWidth result: ' + parsetreegen.determineTreeWidth(nodeRoot).__str__()
 print parsetreegen.as_text(nodeRoot)
 print '\n\nSVG XML output: \n\n' + parsetreegen.as_svg(nodeRoot, "testSVG.svg", None)

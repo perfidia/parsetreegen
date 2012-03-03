@@ -6,9 +6,10 @@ from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
 
-class SVGCreator:
+class SVGTreeCreator:
     def __init__(self, conf):
         self.__conf = conf
+        self.__nodeDefaultWidth = 100
         
         self.prepareSVGObject()
         self.prepareShapeBuilder()
@@ -25,11 +26,53 @@ class SVGCreator:
     def createSVGFile(self, fileName):
         self.__SVGObject.save(fileName)
         
-    def prepareNode(self, node): # node is an instance of class Node 
-        startX = 50
-        startY = 50
-        width = 100
-        height = 200
+    def determineTreeWidth(self, data, level = 1, result = None):
+        '''
+        Counts nodes (type = 'node', excluding type = 'reference') on each depth level.
+    
+        @param data: root node of tree or subtree
+        @param level: depth level of node investigated currently
+        @param result: dictionary with with levels as keys and number of nodes on this level as values
+    
+        @return: updated result
+        '''
+        if data['type'] == 'node':
+            if result == None and level == 1:
+                result = dict()
+                result[1] = 1
+                
+            if level != 1 and result != None:
+                if result.__contains__(level):
+                    result[level] += 1
+                else:
+                    result[level] = 1
+                    
+            if data.has_key('children'):
+                for child in data['children']:
+                    result = self.determineTreeWidth(child, level + 1, result)
+                                
+        return result
+        
+    def prepareTree(self, rootNode):
+        treeWidth = self.determineTreeWidth(rootNode)
+        
+        maxWidth = 0
+        for level in treeWidth.keys():
+            if treeWidth[level] > maxWidth:
+                maxWidth = treeWidth[level]
+        
+        self.prepareNode(rootNode, maxWidth / 2 * (self.__nodeDefaultWidth + 150), 50)
+        
+        if rootNode['type'] == 'node':
+            if rootNode.has_key('children'):
+                i = 0
+                for child in rootNode['children']:
+                    self.prepareNode(child, i * (self.__nodeDefaultWidth + 150), 2 * 150)
+                    i += 1
+        
+    def prepareNode(self, node, startX, startY):
+        width = self.__nodeDefaultWidth
+        height = 100
         
         nodeGroup = g()
         
