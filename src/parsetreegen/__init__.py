@@ -19,7 +19,7 @@ Znacznik	Opis	Przykład
 
 import svgcreator
 
-conf = {
+defaultConf = {
 		# jednosta jest px
 		'frame': {              # ramka zawierajaca tekst
 			'thickness': 1,     # grubosc ramki
@@ -66,8 +66,10 @@ def as_svg(data, filename = None, conf = None):
 
 	@return: SVG representation of file
 	'''
-	
-	svgCreator = svgcreator.SVGCreator()
+	if conf != None:
+		svgCreator = svgcreator.SVGCreator(conf)
+	else:
+		svgCreator = svgcreator.SVGCreator(defaultConf)
 	svgCreator.prepareNode(data)
 	if filename != None:
 		svgCreator.createSVGFile(filename)

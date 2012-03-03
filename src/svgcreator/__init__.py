@@ -7,7 +7,9 @@ from pysvg.builders import StyleBuilder
 from pysvg.structure import g
 
 class SVGCreator:
-    def __init__(self):
+    def __init__(self, conf):
+        self.__conf = conf
+        
         self.prepareSVGObject()
         self.prepareShapeBuilder()
         
@@ -24,30 +26,32 @@ class SVGCreator:
         self.__SVGObject.save(fileName)
         
     def prepareNode(self, node): # node is an instance of class Node 
-        self.prepareNodeContainer()
+        startX = 50
+        startY = 50
+        width = 100
+        height = 200
+        
+        nodeGroup = g()
+        
+        self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
         if node['type'] == 'node':
-            self.prepareNodeHeader("TestNodeHeader")
-#            for line in node['value']:
-#                if isinstance(line, int):
-#                    pass
-#                elif isinstance(line, str):
-#                    pass
-#                else:
-#                    raise Exception("unsupported value type")
+            i = 0
+            for line in node['value']:                
+                if isinstance(line, int):
+                    #TODO insert horizontal line to separate
+                    separatorObj = text('~~~~~~~~', startX, startY + (i * 15))
+                    nodeGroup.addElement(separatorObj)
+                elif isinstance(line, str):
+                    txtObj = text(line, startX, startY + (i * 15))
+                    nodeGroup.addElement(txtObj)
+                else:
+                    raise Exception("unsupported value type")
+                
+                i += 1
+                
+            self.__SVGObject.addElement(nodeGroup)
         
-    def prepareNodeContainer(self):
-        self.__nodeContainer = g() 
-        
-    def prepareNodeHeader(self, headerText):        
-        rect = self.__shapeBuilder.createRect(0, 0, 100, 55, strokewidth=1, stroke='black')
-        headerTextObj = text("Node type:", 5, 20)
-        nodeTypeText = text(headerText, 5, 40)
-        nodeTypeTextStyle = StyleBuilder()
-        nodeTypeTextStyle.setFontWeight('bold')
-        nodeTypeText.set_style(nodeTypeTextStyle.getStyle())
-        self.__nodeContainer.addElement(rect)
-        self.__nodeContainer.addElement(headerTextObj)
-        self.__nodeContainer.addElement(nodeTypeText)
-        self.__SVGObject.addElement(self.__nodeContainer)
-        
-    
+    def prepareNodeContainer(self, startX, startY, width, height, nodeGroup):
+        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black')
+        nodeGroup.addElement(rect) 
+            
