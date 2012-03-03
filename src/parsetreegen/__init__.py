@@ -30,7 +30,7 @@ defaultConf = {
 			},
 			'font': {                 # czcionka
 				'name': 'Arial',      # rodzaj czcionki
-				'size': 12,           # rozmiar czcionki
+				'size': 10,           # rozmiar czcionki
 				'align': 'justified', # left, right, justified
 			},
 		},

@@ -12,6 +12,10 @@ class SVGTreeCreator:
         self.__nodeDefaultWidth = 100
         self.__nodeDefaultHeight = 100
         
+        self.__textStyle = StyleBuilder()
+        self.__textStyle.setFontFamily(fontfamily=self.__conf['frame']['font']['name'])
+        self.__textStyle.setFontSize(self.__conf['frame']['font']['size'].__str__() + 'px')
+        
         self.prepareSVGObject()
         self.prepareShapeBuilder()
         
@@ -77,18 +81,22 @@ class SVGTreeCreator:
         width = self.__nodeDefaultWidth
         height = self.__nodeDefaultHeight
         
+        startX += self.__conf['frame']['padding']
+        startY += self.__conf['frame']['padding']
+        
         nodeGroup = g()
+        nodeGroup.set_style(self.__textStyle.getStyle())        
         
         self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
         if node['type'] == 'node':
-            i = 0
+            i = 1
             for line in node['value']:                
                 if isinstance(line, int):
                     #TODO insert horizontal line to separate
-                    separatorObj = text('~~~~~~~~', startX, startY + (i * 15))
+                    separatorObj = text('~~~~~~~~', startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding'])
                     nodeGroup.addElement(separatorObj)
                 elif isinstance(line, str):
-                    txtObj = text(line, startX, startY + (i * 15))
+                    txtObj = text(line, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding'])
                     nodeGroup.addElement(txtObj)
                 else:
                     raise Exception("unsupported value type")
