@@ -92,8 +92,7 @@ class SVGTreeCreator:
             i = 1
             for line in node['value']:                
                 if isinstance(line, int):
-                    #TODO insert horizontal line to separate
-                    separatorObj = text('~~~~~~~~', startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding'])
+                    separatorObj = self.__shapeBuilder.createLine(startX, startY + (i * 15), startX + width, startY + (i * 15), strokewidth=self.__conf['frame']['separator']['width'])
                     nodeGroup.addElement(separatorObj)
                 elif isinstance(line, str):
                     txtObj = text(line, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding'])
