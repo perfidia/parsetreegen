@@ -149,7 +149,7 @@ nodeRoot = {
 		'children': [nodeL1C1, nodeL1C2, nodeL1C3, nodeL1C4, nodeL1C5],
 }
 
-print nodeL1C1SB2
-
-#print parsetreegen.as_text(nodeRoot)
+print nodeRoot
+print 'determineTreeWidth result: ' + parsetreegen.determineTreeWidth(nodeRoot).__str__()
+print parsetreegen.as_text(nodeRoot)
 print '\n\nSVG XML output: \n\n' + parsetreegen.as_svg(nodeRoot, "testSVG.svg", None)
