@@ -17,7 +17,7 @@ Znacznik	Opis	Przykład
 
 '''
 
-
+import svgcreator
 
 conf = {
 		# jednosta jest px
@@ -66,7 +66,13 @@ def as_svg(data, filename = None, conf = None):
 
 	@return: SVG representation of file
 	'''
-	return
+	
+	svgCreator = svgcreator.SVGCreator()
+	svgCreator.prepareNode(data)
+	if filename != None:
+		svgCreator.createSVGFile(filename)
+	
+	return svgCreator.prepareXML()
 
 def __partial(data, indent, nodes):
 	result = ''

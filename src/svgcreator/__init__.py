@@ -23,23 +23,30 @@ class SVGCreator:
     def createSVGFile(self, fileName):
         self.__SVGObject.save(fileName)
         
-    def drawNode(self, node): # node is an instance of class Node 
+    def prepareNode(self, node): # node is an instance of class Node 
         self.prepareNodeContainer()
-        
+        if node['type'] == 'node':
+            self.prepareNodeHeader("TestNodeHeader")
+#            for line in node['value']:
+#                if isinstance(line, int):
+#                    pass
+#                elif isinstance(line, str):
+#                    pass
+#                else:
+#                    raise Exception("unsupported value type")
         
     def prepareNodeContainer(self):
         self.__nodeContainer = g() 
         
-    def prepareNodeHeader(self, nodeType):
-        self.prepareNodeContainer()
+    def prepareNodeHeader(self, headerText):        
         rect = self.__shapeBuilder.createRect(0, 0, 100, 55, strokewidth=1, stroke='black')
-        headerText = text("Node type:", 5, 20)
-        nodeTypeText = text(nodeType, 5, 40)
+        headerTextObj = text("Node type:", 5, 20)
+        nodeTypeText = text(headerText, 5, 40)
         nodeTypeTextStyle = StyleBuilder()
         nodeTypeTextStyle.setFontWeight('bold')
         nodeTypeText.set_style(nodeTypeTextStyle.getStyle())
         self.__nodeContainer.addElement(rect)
-        self.__nodeContainer.addElement(headerText)
+        self.__nodeContainer.addElement(headerTextObj)
         self.__nodeContainer.addElement(nodeTypeText)
         self.__SVGObject.addElement(self.__nodeContainer)
         
