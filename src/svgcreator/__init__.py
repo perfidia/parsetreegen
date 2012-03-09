@@ -5,12 +5,11 @@ from pysvg.text import text
 from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
+from bbcoderesolver import BBCodeResolver
 
 class SVGTreeCreator:
     def __init__(self, conf):
         self.__conf = conf
-        self.__nodeDefaultWidth = 100
-        self.__nodeDefaultHeight = 100
         
         self.__textStyle = StyleBuilder()
         self.__textStyle.setFontFamily(fontfamily=self.__conf['frame']['font']['name'])
@@ -67,25 +66,27 @@ class SVGTreeCreator:
 #                    self.prepareNode(child, i * (self.__nodeDefaultWidth + 150), 2 * 150)
 #                    i += 1
     
-    def prepareTreeLevels(self, treeLevels):
+    def prepareTreeLevels(self, treeLevels):  
         for level in treeLevels.keys():
             self.prepareTreeLevel(treeLevels[level], level)
     
     def prepareTreeLevel(self, nodes, level):
         i = 0
         for node in nodes.values():
-            self.prepareNode(node, i * (self.__nodeDefaultWidth + 150), level * 120)
+            self.prepareNode(node, i * (self.__conf['frame']['width'] + 150), level * 120)
             i += 1
         
     def prepareNode(self, node, startX, startY):
-        width = self.__nodeDefaultWidth
-        height = self.__nodeDefaultHeight
+        
+        width = self.__conf['frame']['width'];
+        height = self.__determineContainterHeight(node);
         
         startX += self.__conf['frame']['padding']
         startY += self.__conf['frame']['padding']
         
         nodeGroup = g()
         nodeGroup.set_style(self.__textStyle.getStyle())        
+        
         
         self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
         if node['type'] == 'node':
@@ -107,4 +108,24 @@ class SVGTreeCreator:
     def prepareNodeContainer(self, startX, startY, width, height, nodeGroup):
         rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black')
         nodeGroup.addElement(rect) 
-            
+        
+    def __determineContainterHeight(self, node):
+        linesNumber = len(self.__createLines(node['value']));
+        return linesNumber * self.__determineLineHeight();
+    
+    def __determineLineHeight(self):
+        return 40;
+    
+    def __createLines(self, values):
+        resolver = BBCodeResolver();
+        
+        result = [];
+        
+        for value in values:
+            lines = resolver.resolveString(value);
+            if isinstance(lines, list):
+                for line in lines:
+                    result.append(line);
+        
+        return result;
+        

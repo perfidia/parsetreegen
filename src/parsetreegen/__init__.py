@@ -24,7 +24,7 @@ defaultConf = {
 		'frame': {              # ramka zawierajaca tekst
 			'thickness': 1,     # grubosc ramki
 			'padding': 10,      # odstep pomiedzy ramka i tekstem
-			'width': 200,       # szerokosc ramki
+			'width': 600,       # szerokosc ramki
 			'separator': {      # seperator w ramce
 				'width': 1,     # grubość linni
 			},

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"  >
+<g style="font-size:10px; font-family:Arial; "  >
+<rect style="stroke:black; stroke-width:1; fill:none; " height="0" width="600" y="10" x="10"  />
+<text y="35" x="20"  >
+asd[br]f[s]na[b]me[i] =[/i] "[/b]Elem[/s]entType"</text>
+<line y1="40" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="40"  />
+<text y="65" x="20"  >
+Attribute(s):</text>
+<text y="80" x="20"  >
+name = "ElementID"</text>
+<text y="95" x="20"  >
+duplicated = false</text>
+<text y="110" x="20"  >
+length = 9</text>
+</g>
+<g style="font-size:10px; font-family:Arial; "  >
+<rect style="stroke:black; stroke-width:1; fill:none; " height="0" width="600" y="130" x="10"  />
+<text y="155" x="20"  >
+Node type:[br][b]Concat[/b]</text>
+<line y1="160" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="160"  />
+<text y="185" x="20"  >
+Attribute(s):</text>
+<text y="200" x="20"  >
+asdf[s]na[b]me[i] =[/i] "[/b]Elem[/s]entType"</text>
+<text y="215" x="20"  >
+duplicated = false</text>
+<text y="230" x="20"  >
+length = 11</text>
+</g>
+</svg>
