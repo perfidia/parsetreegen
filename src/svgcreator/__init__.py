@@ -110,11 +110,12 @@ class SVGTreeCreator:
         nodeGroup.addElement(rect) 
         
     def __determineContainterHeight(self, node):
-        linesNumber = len(self.__createLines(node['value']));
+        #linesNumber = len(self.__createLines(node['value']));
+        linesNumber = len(node['value'])
         return linesNumber * self.__determineLineHeight();
     
     def __determineLineHeight(self):
-        return 40;
+        return 18;
     
     def __createLines(self, values):
         resolver = BBCodeResolver();
