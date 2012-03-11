@@ -23,13 +23,13 @@ class BBCText:
         return self.__isStrike;
     
     def isUnderline(self):
-        self.__isUnderline;
+        return self.__isUnderline;
         
     def getColor(self):
-        self.__color;
+        return self.__color;
         
     def getText(self):
-        self.__text;
+        return self.__text;
         
     '''
     Setters create new object to make this class immutable.
