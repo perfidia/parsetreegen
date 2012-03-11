@@ -30,7 +30,23 @@ class BBCText:
         
     def getText(self):
         return self.__text;
+    
+    def getStyle(self):
+        style = "";
+        if self.isBold():
+            style = style + "font-weight: bold; ";
+        if self.isItalics():
+            style = style + "font-style: italic; ";
+        if self.isStrike():
+            style = style + "text-decoration: line-through; ";
+        if self.isUnderline():
+            style = style + "text-decoration : underline; ";
         
+        style = style + "color: #" + self.getColor() + ";";
+        
+        return style;
+        
+    
     '''
     Setters create new object to make this class immutable.
     '''

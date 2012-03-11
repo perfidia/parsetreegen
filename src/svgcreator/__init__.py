@@ -107,6 +107,7 @@ class SVGTreeCreator:
                     for txt in line:
                         span = tspan();
                         span.appendTextContent(txt.getText());
+                        span.setAttribute("style", txt.getStyle())
                         txtObj.addElement(span)
                     
                     nodeGroup.addElement(txtObj)

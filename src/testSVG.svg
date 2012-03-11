@@ -2,264 +2,264 @@
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="10" x="10"  />
 <text y="35" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="50" x="20"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Concat</tspan>
 </text>
 <line y1="55" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="55"  />
 <text y="80" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="95" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 name = "ElementID"</tspan>
 </text>
 <text y="110" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = false</tspan>
 </text>
 <text y="125" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 9</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="130" x="10"  />
 <text y="155" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="170" x="20"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Concat</tspan>
 </text>
 <line y1="175" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="175"  />
 <text y="200" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="215" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 name = "ElementType"</tspan>
 </text>
 <text y="230" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = false</tspan>
 </text>
 <text y="245" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 11</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="108" width="600" y="130" x="760"  />
 <text y="155" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="170" x="770"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Char</tspan>
 </text>
 <line y1="175" x2="1360" style="stroke:black; stroke-width:1; " x1="760" y2="175"  />
 <text y="200" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="215" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 value = '-'</tspan>
 </text>
 <text y="230" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 1</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="130" x="1510"  />
 <text y="155" x="1520"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="170" x="1520"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 ExactQuantity</tspan>
 </text>
 <line y1="175" x2="2110" style="stroke:black; stroke-width:1; " x1="1510" y2="175"  />
 <text y="200" x="1520"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="215" x="1520"  >
-<tspan  >
+<tspan style="color: #7;"  >
 value = 5</tspan>
 </text>
 <text y="230" x="1520"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = true</tspan>
 </text>
 <text y="245" x="1520"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="108" width="600" y="130" x="2260"  />
 <text y="155" x="2270"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="170" x="2270"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Char</tspan>
 </text>
 <line y1="175" x2="2860" style="stroke:black; stroke-width:1; " x1="2260" y2="175"  />
 <text y="200" x="2270"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="215" x="2270"  >
-<tspan  >
+<tspan style="color: #7;"  >
 value = '-'</tspan>
 </text>
 <text y="230" x="2270"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 1</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="108" width="600" y="250" x="10"  />
 <text y="275" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="290" x="20"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 InCharClass</tspan>
 </text>
 <line y1="295" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="295"  />
 <text y="320" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="335" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = false</tspan>
 </text>
 <text y="350" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="250" x="760"  />
 <text y="275" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="290" x="770"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 ExactQuantity</tspan>
 </text>
 <line y1="295" x2="1360" style="stroke:black; stroke-width:1; " x1="760" y2="295"  />
 <text y="320" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="335" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 value = 2</tspan>
 </text>
 <text y="350" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = false</tspan>
 </text>
 <text y="365" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="370" x="10"  />
 <text y="395" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="410" x="20"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Range</tspan>
 </text>
 <line y1="415" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="415"  />
 <text y="440" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="455" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 min = 'A'</tspan>
 </text>
 <text y="470" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 max = 'Z'</tspan>
 </text>
 <text y="485" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="108" width="600" y="370" x="760"  />
 <text y="395" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="410" x="770"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 InCharClass</tspan>
 </text>
 <line y1="415" x2="1360" style="stroke:black; stroke-width:1; " x1="760" y2="415"  />
 <text y="440" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="455" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 duplicated = true</tspan>
 </text>
 <text y="470" x="770"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="126" width="600" y="490" x="10"  />
 <text y="515" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Node type:</tspan>
 </text>
 <text y="530" x="20"  >
-<tspan  >
+<tspan style="font-weight: bold; color: #7;"  >
 Range</tspan>
 </text>
 <line y1="535" x2="610" style="stroke:black; stroke-width:1; " x1="10" y2="535"  />
 <text y="560" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
 <text y="575" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 min = 0</tspan>
 </text>
 <text y="590" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 max = 9</tspan>
 </text>
 <text y="605" x="20"  >
-<tspan  >
+<tspan style="color: #7;"  >
 length = 3</tspan>
 </text>
 </g>
