@@ -2,10 +2,13 @@
 
 from pysvg.structure import svg
 from pysvg.text import text
+from pysvg.text import tspan;
 from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
 from bbcoderesolver import BBCodeResolver
+from bbcoderesolver.BBCText import BBCText;
+from bbcoderesolver.BBCLine import BBCLine;
 
 class SVGTreeCreator:
     def __init__(self, conf):
@@ -91,12 +94,21 @@ class SVGTreeCreator:
         self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
         if node['type'] == 'node':
             i = 1
-            for line in node['value']:                
+            
+            lines = self.__createLines(node['value'])
+            
+            for line in lines:                
                 if isinstance(line, int):
                     separatorObj = self.__shapeBuilder.createLine(startX, startY + (i * 15), startX + width, startY + (i * 15), strokewidth=self.__conf['frame']['separator']['width'])
                     nodeGroup.addElement(separatorObj)
-                elif isinstance(line, str):
-                    txtObj = text(line, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding'])
+                elif isinstance(line, list):
+                    txtObj = text(None, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding']);
+                    
+                    for txt in line:
+                        span = tspan();
+                        span.appendTextContent(txt.getText());
+                        txtObj.addElement(span)
+                    
                     nodeGroup.addElement(txtObj)
                 else:
                     raise Exception("unsupported value type")
@@ -106,12 +118,12 @@ class SVGTreeCreator:
             self.__SVGObject.addElement(nodeGroup)
         
     def prepareNodeContainer(self, startX, startY, width, height, nodeGroup):
-        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black')
+        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black', fill='white')
         nodeGroup.addElement(rect) 
         
     def __determineContainterHeight(self, node):
-        #linesNumber = len(self.__createLines(node['value']));
-        linesNumber = len(node['value'])
+        linesNumber = len(self.__createLines(node['value']));
+        #TODO wrapping!
         return linesNumber * self.__determineLineHeight();
     
     def __determineLineHeight(self):
@@ -123,10 +135,13 @@ class SVGTreeCreator:
         result = [];
         
         for value in values:
-            lines = resolver.resolveString(value);
-            if isinstance(lines, list):
-                for line in lines:
-                    result.append(line);
+            if isinstance(value, str):
+                lines = resolver.resolveString(value);
+                if isinstance(lines, list):
+                    for line in lines:
+                        result.append(line);
+            elif isinstance(value, int):
+                result.append(value);
         
         return result;
         

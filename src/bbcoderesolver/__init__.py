@@ -77,16 +77,18 @@ class BBCodeResolver:
         
         if isinstance(text, str):
             lines = text.split("[br]");
+            convertedLines = [];
             
             result = [];
             
             for line in lines:
                 line = self.__generateBBCReplacements(line);
-                
-                print line;
-                #result.append(self.__getBBCLine(line));
+                convertedLines.append(line);
             
             self.__resolveMappings();
+            
+            for line in convertedLines:
+                result.append(self.getBBCLine(line));
             
             return result;
         else:
@@ -140,6 +142,90 @@ class BBCodeResolver:
             if not self.__mapping[key]['checked']:
                 return False
         return True;
+    
+    def getBBCLine(self, lineString):
+        return self.__getBBCLine(lineString, [], "0");
+    
+    def __getBBCLine(self, lineString, types, prevColor):
+        texts = [];
+        
+        lineLen = len(lineString);
+        lastIndex = 0;
+        pattern = "{\$[0-9]+([bisu]|(c=[a-zA-Z]+))}";
+        match = re.search(pattern, lineString);
+        color = None;
+        
+        while match != None:
+            if match.start() > lastIndex:
+                plainText = match.string[lastIndex:match.start()]
+                texts.append(self.__toBBCText(plainText, types, color));
+            id = match.string[match.start():match.end()];
+            type = self.__resolveMappingType(id);
+            typesTemp = list(types);
+            typesTemp.append(type);
+            
+            lastIndex = match.end();
+            
+            if type == 'c':
+                match = re.search("[a-zA-Z][a-zA-Z]+");
+                color = match.string[match.start():match.end()];
+                
+            if color == None:
+                color = prevColor;
+            
+            innerResult = self.__getBBCLine(self.__mapping[id]['value'], typesTemp, color);
+            for element in innerResult:
+                texts.append(element);
+            
+            match = re.search(pattern, match.string[match.end():lineLen]);
+            
+        if lastIndex != lineLen:
+            texts.append(self.__toBBCText(lineString[lastIndex:lineLen], types, color))
+            
+        return texts;
+            
+            
+            
+    def __toBBCText(self, string, types, color):
+        isBold = False;
+        isItalic = False;
+        isStrike = False;
+        isUnderline = False;
+        color = self.__resolveColor(color);
+        
+        if types.__contains__('b'):
+            isBold = True;
+        if types.__contains__('i'):
+            isItalic = True;
+        if types.__contains__('s'):
+            isStrike = True;
+        if types.__contains__('u'):
+            isUnderline = True;
+                
+        return BBCText(isBold, isItalic, isStrike, isUnderline, color, string);
+        
+        
+            
+    def __resolveColor(self, color):
+        if color != None:
+            color = color.lower();
+            if color == 'red':
+                return "1";
+            elif color == 'blue':
+                return "2";
+            elif color == 'black':
+                return "3";
+            elif color == 'white':
+                return "4";
+            elif color == 'pink':
+                return "5";
+            elif color == 'brown':
+                return "6";
+
+        return "7";
+            
+    def __resolveMappingType(self, mapping):
+        return re.sub("{\$[0-9]+", "", mapping)[0];
     
     '''
     Replacements for BBCode tags. 
