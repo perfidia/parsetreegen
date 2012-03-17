@@ -152,4 +152,3 @@ nodeRoot = {
 print nodeRoot
 print parsetreegen.as_text(nodeRoot)
 print '\n\nSVG XML output: \n\n' + parsetreegen.as_svg(nodeRoot, "testSVG.svg", None)
-print 'testCommit'

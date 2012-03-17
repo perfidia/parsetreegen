@@ -2,13 +2,14 @@
 
 from pysvg.structure import svg
 from pysvg.text import text
-from pysvg.text import tspan;
+from pysvg.text import tspan
 from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
 from bbcoderesolver import BBCodeResolver
-from bbcoderesolver.BBCText import BBCText;
-from bbcoderesolver.BBCLine import BBCLine;
+from bbcoderesolver.BBCText import BBCText
+from bbcoderesolver.BBCLine import BBCLine
+from ParseTreeGenStructures import FramePosition
 
 class SVGTreeCreator:
     def __init__(self, conf):
@@ -17,6 +18,9 @@ class SVGTreeCreator:
         self.__textStyle = StyleBuilder()
         self.__textStyle.setFontFamily(fontfamily=self.__conf['frame']['font']['name'])
         self.__textStyle.setFontSize(self.__conf['frame']['font']['size'].__str__() + 'px')
+        
+        self.__containerHeights = dict()
+        self.__framesPositions = dict()
         
         self.prepareSVGObject()
         self.prepareShapeBuilder()
@@ -32,6 +36,32 @@ class SVGTreeCreator:
     
     def createSVGFile(self, fileName):
         self.__SVGObject.save(fileName)
+        
+    def determineFramesPositions(self, node, level = 0):
+        '''
+        Determines the spatial position of frames in SVG.
+    
+        @param node: root node of tree or subtree
+        @param level: depth level of node investigated currently    
+        '''
+        if node['type'] == 'node':
+            if not self.__framesPositions.__contains__(level):
+                self.__framesPositions[level] = dict()
+            
+            x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
+            y = (self.__containerHeights[node['id']] + self.__conf['frame']['horizontalOffset']) * level
+            width = self.__conf['frame']['width']
+            height = self.__containerHeights[node['id']]
+            
+            self.__framesPositions[level][node['id']] = FramePosition(x, y, width, height)
+                
+            if not level == 0:                
+                self.__updateFramesOffsets()
+                    
+            if node.has_key('children'):
+                for child in node['children']:
+                    self.determineFramesPositions(child, level + 1)
+    
         
     def determineTreeLevels(self, data, level = 0, result = None):
         '''
@@ -81,8 +111,9 @@ class SVGTreeCreator:
         
     def prepareNode(self, node, startX, startY):
         
-        width = self.__conf['frame']['width'];
+        width = self.__conf['frame']['width'];        
         height = self.__determineContainterHeight(node);
+        self.__containerHeights[node['id']] = height
         
         startX += self.__conf['frame']['padding']
         startY += self.__conf['frame']['padding']
@@ -145,4 +176,7 @@ class SVGTreeCreator:
                 result.append(value);
         
         return result;
+    
+    def __updateFramesOffsets(self):
+        pass
         
