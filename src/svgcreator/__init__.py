@@ -91,12 +91,10 @@ class SVGTreeCreator:
         
     def prepareTree(self, rootNode):
         self.determineFramesPositions(rootNode)
-        
         treeLevels = self.determineTreeLevels(rootNode)
-        
+        self.prepareConnectionsLevels(treeLevels)
         self.prepareTreeLevels(treeLevels)
         
-        self.prepareConnectionsLevels(treeLevels)
         
 #        if rootNode['type'] == 'node':
 #            if rootNode.has_key('children'):
