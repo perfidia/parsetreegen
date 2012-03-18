@@ -47,6 +47,8 @@ class SVGTreeCreator:
         if node['type'] == 'node':
             if not self.__framesPositions.__contains__(level):
                 self.__framesPositions[level] = dict()
+                
+            self.__containerHeights[node['id']] = self.__determineContainterHeight(node);
             
             x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
             y = (self.__containerHeights[node['id']] + self.__conf['frame']['horizontalOffset']) * level
@@ -88,10 +90,11 @@ class SVGTreeCreator:
         return result
         
     def prepareTree(self, rootNode):
+        self.determineFramesPositions(rootNode)
+        
         treeLevels = self.determineTreeLevels(rootNode)
         
         self.prepareTreeLevels(treeLevels)
-        self.determineFramesPositions(rootNode)
         
         self.prepareConnectionsLevels(treeLevels)
         
@@ -109,7 +112,8 @@ class SVGTreeCreator:
     def prepareTreeLevel(self, nodes, level):
         i = 0
         for node in nodes.values():
-            self.prepareNode(node, i * (self.__conf['frame']['width'] + 150), level * 120)
+            #self.prepareNode(node, i * (self.__conf['frame']['width'] + 150), level * 120)
+            self.prepareNode(node, self.__framesPositions[level][node['id']].x, self.__framesPositions[level][node['id']].y)
             i += 1
             
     def prepareConnectionsLevels(self, treeLevels):  
@@ -148,8 +152,8 @@ class SVGTreeCreator:
         height = self.__determineContainterHeight(node);
         self.__containerHeights[node['id']] = height
         
-        startX += self.__conf['frame']['padding']
-        startY += self.__conf['frame']['padding']
+        #startX += self.__conf['frame']['padding']
+        #startY += self.__conf['frame']['padding']
         
         nodeGroup = g()
         nodeGroup.set_style(self.__textStyle.getStyle())        
