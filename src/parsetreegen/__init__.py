@@ -73,7 +73,7 @@ def as_svg(data, filename = None, conf = None):
 	else:
 		svgCreator = svgcreator.SVGTreeCreator(defaultConf)
 	svgCreator.prepareTree(data)
-	svgCreator.determineFramesPositions(data)
+#	svgCreator.determineFramesPositions(data)
 	if filename != None:
 		svgCreator.createSVGFile(filename)
 	

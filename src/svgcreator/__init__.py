@@ -91,6 +91,9 @@ class SVGTreeCreator:
         treeLevels = self.determineTreeLevels(rootNode)
         
         self.prepareTreeLevels(treeLevels)
+        self.determineFramesPositions(rootNode)
+        
+        self.prepareConnectionsLevels(treeLevels)
         
 #        if rootNode['type'] == 'node':
 #            if rootNode.has_key('children'):
@@ -108,7 +111,37 @@ class SVGTreeCreator:
         for node in nodes.values():
             self.prepareNode(node, i * (self.__conf['frame']['width'] + 150), level * 120)
             i += 1
+            
+    def prepareConnectionsLevels(self, treeLevels):  
+        for level in treeLevels.keys():
+            self.prepareConnectionsLevel(treeLevels[level], level)
+            
+    def prepareConnectionsLevel(self, nodes, level):
+        for node in nodes.values():
+            self.prepareConnectionsForNode(level, node)
+    
+    def prepareConnectionsForNode(self, level, node):
+        if node['type'] == 'node':
+            if node.has_key('children'):
+                for child in node['children']:
+                    if child['type'] == 'node':
+                        self.prepareConnection(level, node, child)
+                    
+    def prepareConnection(self, level, startNode, endNode):
+        startPositionFrame = self.__framesPositions[level][startNode['id']]
+        endPositionFrame = self.__framesPositions[level + 1][endNode['id']]
         
+        startX = startPositionFrame.x +  self.__conf['frame']['width'] / 2;
+        startY = startPositionFrame.y;
+        endX = endPositionFrame.x +  self.__conf['frame']['width'] / 2;
+        endY = endPositionFrame.y;        
+        
+        self.drawConnection(startX, startY, endX, endY, self.__conf['connection'])
+        
+    def drawConnection(self, startX, startY, endX, endY, connectionConf):
+        line = self.__shapeBuilder.createLine(startX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
+        self.__SVGObject.addElement(line);
+                    
     def prepareNode(self, node, startX, startY):
         
         width = self.__conf['frame']['width'];        
