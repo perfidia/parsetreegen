@@ -148,7 +148,13 @@ class SVGTreeCreator:
         self.__SVGObject.addElement(line);
         
         slope = float();
-        markerSize = float(50);
+        
+        if connectionConf['marker'] == 'small':
+            markerSize = float(25);
+        elif connectionConf['marker'] == 'normal':
+            markerSize = float(50);
+        elif connectionConf['marker'] == 'large':
+            markerSize = float(75); 
         
         startX = float(startX)
         startY = float(startY)
