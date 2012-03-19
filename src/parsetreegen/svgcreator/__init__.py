@@ -6,21 +6,22 @@ from pysvg.text import tspan
 from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
-from bbcoderesolver import BBCodeResolver
-from bbcoderesolver.BBCText import BBCText
-from bbcoderesolver.BBCLine import BBCLine
+from parsetreegen.bbcoderesolver import BBCodeResolver
+from parsetreegen.bbcoderesolver.BBCText import BBCText
+from parsetreegen.bbcoderesolver.BBCLine import BBCLine
 from ParseTreeGenStructures import FramePosition
+from parsetreegen.renderers.NodeRenderer import NodeRenderer;
+from parsetreegen.renderers.ArrowRenderer import ArrowRenderer;
 
 class SVGTreeCreator:
     def __init__(self, conf):
         self.__conf = conf
         
-        self.__textStyle = StyleBuilder()
-        self.__textStyle.setFontFamily(fontfamily=self.__conf['frame']['font']['name'])
-        self.__textStyle.setFontSize(self.__conf['frame']['font']['size'].__str__() + 'px')
-        
         self.__containerHeights = dict()
         self.__framesPositions = dict()
+        
+        self.__nodeRenderer = NodeRenderer(conf);
+        self.__arrowRenderer = ArrowRenderer(conf);
         
         self.prepareSVGObject()
         self.prepareShapeBuilder()
@@ -48,7 +49,7 @@ class SVGTreeCreator:
             if not self.__framesPositions.__contains__(level):
                 self.__framesPositions[level] = dict()
                 
-            self.__containerHeights[node['id']] = self.__determineContainterHeight(node);
+            self.__containerHeights[node['id']] = self.__nodeRenderer.getNodeHeight(node);
             
             x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
             y = (self.__containerHeights[node['id']] + self.__conf['frame']['horizontalOffset']) * level
@@ -145,73 +146,9 @@ class SVGTreeCreator:
         self.__SVGObject.addElement(line);
                     
     def prepareNode(self, node, startX, startY):
+        container = self.__nodeRenderer.render(node, startX, startY);
+        self.__SVGObject.addElement(container);
         
-        width = self.__conf['frame']['width'];        
-        height = self.__determineContainterHeight(node);
-        self.__containerHeights[node['id']] = height
-        
-        #startX += self.__conf['frame']['padding']
-        #startY += self.__conf['frame']['padding']
-        
-        nodeGroup = g()
-        nodeGroup.set_style(self.__textStyle.getStyle())        
-        
-        
-        self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
-        if node['type'] == 'node':
-            i = 1
-            
-            lines = self.__createLines(node['value'])
-            
-            for line in lines:                
-                if isinstance(line, int):
-                    separatorObj = self.__shapeBuilder.createLine(startX, startY + (i * 15), startX + width, startY + (i * 15), strokewidth=self.__conf['frame']['separator']['width'])
-                    nodeGroup.addElement(separatorObj)
-                elif isinstance(line, list):
-                    txtObj = text(None, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding']);
-                    
-                    for txt in line:
-                        span = tspan();
-                        span.appendTextContent(txt.getText());
-                        span.setAttribute("style", txt.getStyle())
-                        txtObj.addElement(span)
-                    
-                    nodeGroup.addElement(txtObj)
-                else:
-                    raise Exception("unsupported value type")
-                
-                i += 1
-                
-            self.__SVGObject.addElement(nodeGroup)
-        
-    def prepareNodeContainer(self, startX, startY, width, height, nodeGroup):
-        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black', fill='white')
-        nodeGroup.addElement(rect) 
-        
-    def __determineContainterHeight(self, node):
-        linesNumber = len(self.__createLines(node['value']));
-        #TODO wrapping!
-        return linesNumber * self.__determineLineHeight();
-    
-    def __determineLineHeight(self):
-        return 18;
-    
-    def __createLines(self, values):
-        resolver = BBCodeResolver();
-        
-        result = [];
-        
-        for value in values:
-            if isinstance(value, str):
-                lines = resolver.resolveString(value);
-                if isinstance(lines, list):
-                    for line in lines:
-                        result.append(line);
-            elif isinstance(value, int):
-                result.append(value);
-        
-        return result;
-    
     def __updateFramesOffsets(self):
         pass
         
