@@ -39,72 +39,6 @@ class SVGTreeCreator:
     
     def createSVGFile(self, fileName):
         self.__SVGObject.save(fileName)
-        
-    def determineFramesPositions(self, node, level = 0):
-        '''
-        Determines the spatial position of frames in SVG.
-    
-        @param node: root node of tree or subtree
-        @param level: depth level of node investigated currently    
-        '''
-        if node['type'] == 'node':
-            if not self.__framesPositions.__contains__(level):
-                self.__framesPositions[level] = dict()
-                
-            self.__containerHeights[node['id']] = self.__nodeRenderer.getNodeHeight(node);
-            
-            x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
-            y = (self.__containerHeights[node['id']] + self.__conf['frame']['horizontalOffset']) * level
-            width = self.__conf['frame']['width']
-            height = self.__containerHeights[node['id']]
-            
-            self.__framesPositions[level][node['id']] = FramePosition(x, y, width, height)
-                
-            if not level == 0:                
-                self.__updateFramesOffsets()
-                    
-            if node.has_key('children'):
-                for child in node['children']:
-                    self.determineFramesPositions(child, level + 1)
-    
-        
-    def determineTreeLevels(self, data, level = 0, result = None):
-        '''
-        Grouping nodes according to depth levels. Considering type = 'node', excluding type = 'reference'.
-    
-        @param data: root node of tree or subtree
-        @param level: depth level of node investigated currently
-        @param result: dictionary with with levels as keys and list of nodes on this level as values
-    
-        @return: updated result
-        '''
-        if data['type'] == 'node':
-            if result == None and level == 0:
-                result = dict()                
-                
-            if not result.__contains__(level):
-                result[level] = dict()
-            result[level][len(result[level].keys())] = data
-                    
-            if data.has_key('children'):
-                for child in data['children']:
-                    result = self.determineTreeLevels(child, level + 1, result)
-                                
-        return result
-        
-    def prepareTree(self, rootNode):
-        self.determineFramesPositions(rootNode)
-        treeLevels = self.determineTreeLevels(rootNode)
-        self.prepareConnectionsLevels(treeLevels)
-        self.prepareTreeLevels(treeLevels)
-        
-        
-#        if rootNode['type'] == 'node':
-#            if rootNode.has_key('children'):
-#                i = 0
-#                for child in rootNode['children']:
-#                    self.prepareNode(child, i * (self.__nodeDefaultWidth + 150), 2 * 150)
-#                    i += 1
     
     def prepareTreeLevels(self, treeLevels):  
         for level in treeLevels.keys():
@@ -126,11 +60,11 @@ class SVGTreeCreator:
             self.prepareConnectionsForNode(level, node)
     
     def prepareConnectionsForNode(self, level, node):
-        if node['type'] == 'node':
-            if node.has_key('children'):
-                for child in node['children']:
-                    if child['type'] == 'node':
-                        self.prepareConnection(level, node, child)
+        #if node['type'] == 'node':
+        if node.has_key('children'):
+            for child in node['children']:
+                if child['type'] == 'node':
+                    self.prepareConnection(level, node, child)
                     
     def prepareConnection(self, level, startNode, endNode):
         startPositionFrame = self.__framesPositions[level][startNode['id']]
@@ -196,10 +130,128 @@ class SVGTreeCreator:
         self.__SVGObject.addElement(arrow2);        
     
     def prepareNode(self, node, startX, startY):
+        
+        if node['type'] == 'reference':
+            node = self.__findNode(node['value'], self.__rootNode);
+            
         container = self.__nodeRenderer.render(node, startX, startY);
         self.__SVGObject.addElement(container);
 
+    def __findNode(self, id, node):
+        if node['type'] == 'node':
+            if node['id'] == id:
+                return node;
+            else:
+                try:
+                    for child in node['children']:
+                        found = self.__findNode(id, child)
+                        if found != None:
+                            return found;
+                except KeyError:
+                    return None;
+        return None;
+
+        
+    def __determineFramesPositions(self, node, level = 0):
+        '''
+        Determines the spatial position of frames in SVG.
     
-    def __updateFramesOffsets(self):
-        pass
+        @param node: root node of tree or subtree
+        @param level: depth level of node investigated currently    
+        '''
+        if node['type'] == 'node':
+            if not self.__framesPositions.__contains__(level):
+                self.__framesPositions[level] = dict()
+                
+            self.__containerHeights[node['id']] = self.__nodeRenderer.getNodeHeight(node)
+            
+            x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
+            y = self.__findLevelVerticalPosition(level)
+            width = self.__conf['frame']['width']
+            height = self.__containerHeights[node['id']]
+            
+            self.__framesPositions[level][node['id']] = FramePosition(x, y, width, height)
+                    
+            if node.has_key('children'):
+                for child in node['children']:
+                    self.__determineFramesPositions(child, level + 1)
+    
+    def __updateFramesOffsets(self, node, level = 0):
+        if node['type'] == 'node' and node.has_key('children'):
+                            
+            offsetValue = (self.__nodeChildrenLen(node) - 1) * (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) / 2
+            nodeEncountered = False
+            
+            for frameKey in self.__framesPositions[level]:
+                if node['id'] == frameKey:
+                    self.__framesPositions[level][frameKey].x += offsetValue 
+                    
+                    nodeEncountered = True
+                else:                    
+                    if nodeEncountered:
+                        self.__framesPositions[level][frameKey].x += offsetValue * 2
+                        
+            if node.has_key('children'):
+                childCounter = 0
+                for child in node['children']:
+                    if child['type'] == 'node':
+                        self.__framesPositions[level + 1][child['id']].x = self.__framesPositions[level][node['id']].x - offsetValue + ((self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * childCounter) 
+                        childCounter += 1
+                for child in node['children']:
+                        self.__updateFramesOffsets(child, level + 1)
+    
+        
+    def determineTreeLevels(self, data, level = 0, result = None):
+        '''
+        Grouping nodes according to depth levels. Considering type = 'node', excluding type = 'reference'.
+    
+        @param data: root node of tree or subtree
+        @param level: depth level of node investigated currently
+        @param result: dictionary with with levels as keys and list of nodes on this level as values
+    
+        @return: updated result
+        '''
+        if data['type'] == 'node':
+            if result == None and level == 0:
+                result = dict()                
+                
+            if not result.__contains__(level):
+                result[level] = dict()
+            result[level][len(result[level].keys())] = data
+                    
+            if data.has_key('children'):
+                for child in data['children']:
+                    result = self.determineTreeLevels(child, level + 1, result)
+                                
+        return result
+        
+    def prepareTree(self, rootNode):
+        treeLevels = self.determineTreeLevels(rootNode)
+        self.__determineFramesPositions(rootNode)
+        self.__updateFramesOffsets(rootNode)
+        self.prepareConnectionsLevels(treeLevels)
+        self.prepareTreeLevels(treeLevels)
+
+    def __findLevelVerticalPosition(self, level):
+        maxLevelValue = 0
+        if level <> 0:
+            
+            for nodeHeightKey, nodeHeightValue in self.__containerHeights.iteritems():
+                for nodeKey in self.__framesPositions[level - 1]:
+                    if nodeHeightKey == nodeKey and nodeHeightValue > maxLevelValue:
+                        maxLevelValue = nodeHeightValue
+        
+            maxLevelValue += self.__findLevelVerticalPosition(level - 1) + self.__conf['frame']['horizontalOffset']
+            
+        return maxLevelValue 
+    
+    def __nodeChildrenLen(self, node):
+        result = 0
+        if node.has_key('children'):
+            for child in node['children']:
+                if child['type'] == 'node' :
+                    result += 1
+                    
+        return result
+        
         

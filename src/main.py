@@ -132,6 +132,7 @@ nodeL1C4 = {
 
 nodeL1C5 = {
 		'type': 'reference',
+		'id': 'L1C5',
 		'value': 'L1C3',
 }
 

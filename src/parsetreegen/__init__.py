@@ -17,8 +17,7 @@ Znacznik	Opis	Przykład
 
 '''
 
-import svgcreator
-import pickle;
+import svgcreator;
 import re;
 
 defaultConf = {
