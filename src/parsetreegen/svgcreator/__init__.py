@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 from pysvg.structure import svg
 from pysvg.text import text
 from pysvg.text import tspan
@@ -144,11 +146,65 @@ class SVGTreeCreator:
     def drawConnection(self, startX, startY, endX, endY, connectionConf):
         line = self.__shapeBuilder.createLine(startX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
         self.__SVGObject.addElement(line);
-                    
+        
+        if ((endX - startX) != 0) and ((endY - startY) != 0):
+            slope = float();
+            slopeArrow1 = float();
+            slopeArrow2 = float();
+            
+            markerSize = float(50);
+            arrow1MarkerXFactor = float();
+            arrow2MarkerXFactor = float();
+            arrow1MarkerYFactor = float();
+            arrow2MarkerYFactor = float();
+            
+            startX = float(startX)
+            startY = float(startY)
+            endX = float(endX)
+            endY = float(endY)
+            
+            #print "endY: " + endY.__str__() + " startY: " + startY.__str__() + " endX: " + endX.__str__() + " startX: " + startX.__str__()
+            slope = (endY - startY) / (endX - startX)
+            #print "slope: " + slope.__str__()
+            slopeArrow1 = slope + (slope * 0.4)
+            slopeArrow2 = slope - (slope * 0.4)
+            
+            arrow1MarkerXFactor = markerSize * math.cos(slopeArrow1)
+            arrow1MarkerYFactor = markerSize * math.sin(slopeArrow1)
+            
+            arrow2MarkerXFactor = markerSize * math.cos(slopeArrow2)
+            arrow2MarkerYFactor = markerSize * math.sin(slopeArrow2)
+            
+            if slope < 0:
+                arrow1StartX = endX + arrow1MarkerXFactor
+                arrow2StartX = endX + arrow2MarkerXFactor
+            
+                arrow1StartY = endY + arrow1MarkerYFactor
+                arrow2StartY = endY + arrow2MarkerYFactor
+            else:
+                arrow1StartX = endX - arrow1MarkerXFactor
+                arrow2StartX = endX - arrow2MarkerXFactor
+            
+                arrow1StartY = endY - arrow1MarkerYFactor
+                arrow2StartY = endY - arrow2MarkerYFactor
+            
+            arrow1 = self.__shapeBuilder.createLine(arrow1StartX, arrow1StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
+            arrow2 = self.__shapeBuilder.createLine(arrow2StartX, arrow2StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
+            
+            self.__SVGObject.addElement(arrow1);
+            self.__SVGObject.addElement(arrow2);
+#        else:
+#            arrow1StartX = endX - 10
+#            arrow2StartX = endX + 10;
+#            
+#            arrow1 = self.__shapeBuilder.createLine(arrow1StartX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
+#            arrow2 = self.__shapeBuilder.createLine(arrow2StartX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")        
+    
     def prepareNode(self, node, startX, startY):
         container = self.__nodeRenderer.render(node, startX, startY);
         self.__SVGObject.addElement(container);
-        
+
+    
     def __updateFramesOffsets(self):
         pass
         
