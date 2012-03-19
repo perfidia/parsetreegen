@@ -136,9 +136,9 @@ class SVGTreeCreator:
         startPositionFrame = self.__framesPositions[level][startNode['id']]
         endPositionFrame = self.__framesPositions[level + 1][endNode['id']]
         
-        startX = startPositionFrame.x +  self.__conf['frame']['width'] / 2;
-        startY = startPositionFrame.y;
-        endX = endPositionFrame.x +  self.__conf['frame']['width'] / 2;
+        startX = startPositionFrame.x + startPositionFrame.width / 2;
+        startY = startPositionFrame.y + startPositionFrame.height;
+        endX = endPositionFrame.x + startPositionFrame.width / 2;
         endY = endPositionFrame.y;        
         
         self.drawConnection(startX, startY, endX, endY, self.__conf['connection'])

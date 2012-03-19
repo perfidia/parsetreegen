@@ -25,8 +25,8 @@ defaultConf = {
 			'thickness': 1,     # grubosc ramki
 			'padding': 10,      # odstep pomiedzy ramka i tekstem
 			'width': 600,       # szerokosc ramki
-			'horizontalOffset': 20, # odstep miedzy ramkami w pionie
-			'verticalOffset': 20, # odstep miedzy ramkami w poziomie
+			'horizontalOffset': 100, # odstep miedzy ramkami w pionie
+			'verticalOffset': 100, # odstep miedzy ramkami w poziomie
 			'separator': {      # seperator w ramce
 				'width': 1,     # grubość linni
 			},
