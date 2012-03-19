@@ -11,12 +11,24 @@
 <line y1="116" x2="2400" style="stroke:black; stroke-width:2; " x1="1350" y2="216"  />
 <line y1="209.353068869" x2="2400.0" style="stroke:black; stroke-width:2; " x1="2350.4437864" y2="216.0"  />
 <line y1="213.144411797" x2="2400.0" style="stroke:black; stroke-width:2; " x1="2350.08161044" y2="216.0"  />
+<line y1="116" x2="3100" style="stroke:black; stroke-width:2; " x1="1350" y2="216"  />
+<line y1="212.004265302" x2="3100.0" style="stroke:black; stroke-width:2; " x1="3050.15991468" y2="216.0"  />
+<line y1="214.286050126" x2="3100.0" style="stroke:black; stroke-width:2; " x1="3050.02938488" y2="216.0"  />
+<line y1="256" x2="2050" style="stroke:black; stroke-width:2; " x1="3100" y2="216"  />
+<line y1="213.334597351" x2="2050.0" style="stroke:black; stroke-width:2; " x1="2000.07109426" y2="216.0"  />
+<line y1="214.857242369" x2="2050.0" style="stroke:black; stroke-width:2; " x1="2000.01306066" y2="216.0"  />
 <line y1="332" x2="300" style="stroke:black; stroke-width:2; " x1="650" y2="432"  />
 <line y1="412.529082885" x2="300.0" style="stroke:black; stroke-width:2; " x1="346.0530497" y2="432.0"  />
 <line y1="423.47049229" x2="300.0" style="stroke:black; stroke-width:2; " x1="349.267103611" y2="432.0"  />
 <line y1="332" x2="1000" style="stroke:black; stroke-width:2; " x1="650" y2="432"  />
 <line y1="412.529082885" x2="1000.0" style="stroke:black; stroke-width:2; " x1="953.9469503" y2="432.0"  />
 <line y1="423.47049229" x2="1000.0" style="stroke:black; stroke-width:2; " x1="950.732896389" y2="432.0"  />
+<line y1="332" x2="1700" style="stroke:black; stroke-width:2; " x1="2050" y2="432"  />
+<line y1="412.529082885" x2="1700.0" style="stroke:black; stroke-width:2; " x1="1746.0530497" y2="432.0"  />
+<line y1="423.47049229" x2="1700.0" style="stroke:black; stroke-width:2; " x1="1749.26710361" y2="432.0"  />
+<line y1="524" x2="1000" style="stroke:black; stroke-width:2; " x1="1700" y2="648"  />
+<line y1="635.726717955" x2="1000.0" style="stroke:black; stroke-width:2; " x1="1048.47026457" y2="648.0"  />
+<line y1="642.695714243" x2="1000.0" style="stroke:black; stroke-width:2; " x1="1049.71784944" y2="648.0"  />
 <line y1="533" x2="300" style="stroke:black; stroke-width:2; " x1="300" y2="633"  />
 <line y1="592.545187286" x2="300.0" style="stroke:black; stroke-width:2; " x1="329.383807246" y2="633.0"  />
 <line y1="592.550848933" x2="300.0" style="stroke:black; stroke-width:2; " x1="270.608399534" y2="633.0"  />
@@ -159,6 +171,34 @@ length=1</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
+<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="216" x="2800"  />
+<text y="236" x="2810"  >
+<tspan style="color: #7;"  >
+Nodetype:</tspan>
+</text>
+<text y="251" x="2810"  >
+<tspan style="font-weight: bold; color: #7;"  >
+ExactQuantity</tspan>
+</text>
+<line y1="256" x2="3400" style="stroke:black; stroke-width:1; " x1="2800" y2="256"  />
+<text y="272" x="2810"  >
+<tspan style="color: #7;"  >
+Attribute(s):</tspan>
+</text>
+<text y="287" x="2810"  >
+<tspan style="color: #7;"  >
+value=5</tspan>
+</text>
+<text y="302" x="2810"  >
+<tspan style="color: #7;"  >
+duplicated=true</tspan>
+</text>
+<text y="317" x="2810"  >
+<tspan style="color: #7;"  >
+length=3</tspan>
+</text>
+</g>
+<g style="font-size:10px; font-family:Arial; "  >
 <rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="432" x="0"  />
 <text y="452" x="10"  >
 <tspan style="color: #7;"  >
@@ -206,6 +246,30 @@ value=2</tspan>
 duplicated=false</tspan>
 </text>
 <text y="533" x="710"  >
+<tspan style="color: #7;"  >
+length=3</tspan>
+</text>
+</g>
+<g style="font-size:10px; font-family:Arial; "  >
+<rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="432" x="1400"  />
+<text y="452" x="1410"  >
+<tspan style="color: #7;"  >
+Nodetype:</tspan>
+</text>
+<text y="467" x="1410"  >
+<tspan style="font-weight: bold; color: #7;"  >
+InCharClass</tspan>
+</text>
+<line y1="472" x2="2000" style="stroke:black; stroke-width:1; " x1="1400" y2="472"  />
+<text y="488" x="1410"  >
+<tspan style="color: #7;"  >
+Attribute(s):</tspan>
+</text>
+<text y="503" x="1410"  >
+<tspan style="color: #7;"  >
+duplicated=true</tspan>
+</text>
+<text y="518" x="1410"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
