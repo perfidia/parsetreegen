@@ -3,6 +3,7 @@
 	<name>parsetreegen</name>
 	<comment></comment>
 	<projects>
+		<project>pySVG</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
