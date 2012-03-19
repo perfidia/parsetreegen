@@ -18,6 +18,8 @@ Znacznik	Opis	Przykład
 '''
 
 import svgcreator
+import pickle;
+import re;
 
 defaultConf = {
 		# jednosta jest px
@@ -49,6 +51,7 @@ defaultConf = {
 }
 
 def read(filename):
+	
 	'''
 	Read file and return data representation
 
@@ -56,7 +59,50 @@ def read(filename):
 
 	@return: data representation
 	'''
-	return None
+	
+	file = open(filename, 'rb')
+	fileContent = file.read();
+	fileContent = re.sub("#.*\n", "", fileContent);
+	fileContent = re.sub("\s", "", fileContent);
+	nodes = re.findall("\w+\s*=\s*{.*?}", fileContent);
+	file.close()
+	
+	replacements = dict();
+	
+	for node in nodes:
+		match = re.search("\w+", node);
+		nodeName = match.string[match.start():match.end()];
+		
+		match = re.search("{.*?}", node)
+		nodeContent = match.string[match.start():match.end()];
+		
+		match = re.search("'children':\[.*?\]", nodeContent);
+		
+		if match != None:
+			childrenSection = match.string[match.start():match.end()];
+			
+			for key in replacements.iterkeys():
+				if re.match(".*" + key + ".*", childrenSection):
+					replacements[key]['child'] = True;
+				childrenSection = re.sub(key, "replacements['" + key + "']['node']", childrenSection);
+			
+			nodeContent = re.sub("'children':\[.*?\]", childrenSection, nodeContent);
+			
+			
+		
+		n = eval(nodeContent);
+		
+		replacements[nodeName] = dict();
+		replacements[nodeName]['child'] = False;
+		replacements[nodeName]['node'] = n
+
+	file.close();
+	
+	for value in replacements.itervalues():
+		if not value['child']:
+			return value['node'];
+		
+	raise Exception("Did not find root node");
 
 def as_svg(data, filename = None, conf = None):
 	'''
