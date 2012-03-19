@@ -8,21 +8,22 @@ from pysvg.text import tspan
 from pysvg.builders import ShapeBuilder
 from pysvg.builders import StyleBuilder
 from pysvg.structure import g
-from bbcoderesolver import BBCodeResolver
-from bbcoderesolver.BBCText import BBCText
-from bbcoderesolver.BBCLine import BBCLine
+from parsetreegen.bbcoderesolver import BBCodeResolver
+from parsetreegen.bbcoderesolver.BBCText import BBCText
+from parsetreegen.bbcoderesolver.BBCLine import BBCLine
 from ParseTreeGenStructures import FramePosition
+from parsetreegen.renderers.NodeRenderer import NodeRenderer;
+from parsetreegen.renderers.ArrowRenderer import ArrowRenderer;
 
 class SVGTreeCreator:
     def __init__(self, conf):
         self.__conf = conf
         
-        self.__textStyle = StyleBuilder()
-        self.__textStyle.setFontFamily(fontfamily=self.__conf['frame']['font']['name'])
-        self.__textStyle.setFontSize(self.__conf['frame']['font']['size'].__str__() + 'px')
-        
         self.__containerHeights = dict()
         self.__framesPositions = dict()
+        
+        self.__nodeRenderer = NodeRenderer(conf);
+        self.__arrowRenderer = ArrowRenderer(conf);
         
         self.prepareSVGObject()
         self.prepareShapeBuilder()
@@ -50,7 +51,7 @@ class SVGTreeCreator:
             if not self.__framesPositions.__contains__(level):
                 self.__framesPositions[level] = dict()
                 
-            self.__containerHeights[node['id']] = self.__determineContainterHeight(node);
+            self.__containerHeights[node['id']] = self.__nodeRenderer.getNodeHeight(node);
             
             x = (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * len(self.__framesPositions[level])
             y = (self.__containerHeights[node['id']] + self.__conf['frame']['horizontalOffset']) * level
@@ -146,126 +147,52 @@ class SVGTreeCreator:
         line = self.__shapeBuilder.createLine(startX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
         self.__SVGObject.addElement(line);
         
+        slope = float();
+        markerSize = float(50);
+        
+        startX = float(startX)
+        startY = float(startY)
+        endX = float(endX)
+        endY = float(endY)
+        
         if ((endX - startX) != 0) and ((endY - startY) != 0):
-            slope = float();
-            slopeArrow1 = float();
-            slopeArrow2 = float();
-            
-            markerSize = float(50);
-            arrow1MarkerXFactor = float();
-            arrow2MarkerXFactor = float();
-            arrow1MarkerYFactor = float();
-            arrow2MarkerYFactor = float();
-            
-            startX = float(startX)
-            startY = float(startY)
-            endX = float(endX)
-            endY = float(endY)
-            
-            #print "endY: " + endY.__str__() + " startY: " + startY.__str__() + " endX: " + endX.__str__() + " startX: " + startX.__str__()
             slope = (endY - startY) / (endX - startX)
-            #print "slope: " + slope.__str__()
-            slopeArrow1 = slope + (slope * 0.4)
-            slopeArrow2 = slope - (slope * 0.4)
+        else:
+            slope = 1.5707
+
+
+        slopeArrow1 = slope + (slope * 0.4)
+        slopeArrow2 = slope - (slope * 0.4)
             
-            arrow1MarkerXFactor = markerSize * math.cos(slopeArrow1)
-            arrow1MarkerYFactor = markerSize * math.sin(slopeArrow1)
-            
-            arrow2MarkerXFactor = markerSize * math.cos(slopeArrow2)
-            arrow2MarkerYFactor = markerSize * math.sin(slopeArrow2)
-            
-            if slope < 0:
-                arrow1StartX = endX + arrow1MarkerXFactor
-                arrow2StartX = endX + arrow2MarkerXFactor
-            
-                arrow1StartY = endY + arrow1MarkerYFactor
-                arrow2StartY = endY + arrow2MarkerYFactor
-            else:
-                arrow1StartX = endX - arrow1MarkerXFactor
-                arrow2StartX = endX - arrow2MarkerXFactor
-            
-                arrow1StartY = endY - arrow1MarkerYFactor
-                arrow2StartY = endY - arrow2MarkerYFactor
-            
-            arrow1 = self.__shapeBuilder.createLine(arrow1StartX, arrow1StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
-            arrow2 = self.__shapeBuilder.createLine(arrow2StartX, arrow2StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
-            
-            self.__SVGObject.addElement(arrow1);
-            self.__SVGObject.addElement(arrow2);
-#        else:
-#            arrow1StartX = endX - 10
-#            arrow2StartX = endX + 10;
-#            
-#            arrow1 = self.__shapeBuilder.createLine(arrow1StartX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
-#            arrow2 = self.__shapeBuilder.createLine(arrow2StartX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")        
-                    
+        arrow1MarkerXFactor = markerSize * math.cos(slopeArrow1)
+        arrow1MarkerYFactor = markerSize * math.sin(slopeArrow1)
+        
+        arrow2MarkerXFactor = markerSize * math.cos(slopeArrow2)
+        arrow2MarkerYFactor = markerSize * math.sin(slopeArrow2)
+        
+        if slope < 0:
+            arrow1StartX = endX + arrow1MarkerXFactor
+            arrow2StartX = endX + arrow2MarkerXFactor
+        
+            arrow1StartY = endY + arrow1MarkerYFactor
+            arrow2StartY = endY + arrow2MarkerYFactor
+        else:
+            arrow1StartX = endX - arrow1MarkerXFactor
+            arrow2StartX = endX - arrow2MarkerXFactor
+        
+            arrow1StartY = endY - arrow1MarkerYFactor
+            arrow2StartY = endY - arrow2MarkerYFactor
+        
+        arrow1 = self.__shapeBuilder.createLine(arrow1StartX, arrow1StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
+        arrow2 = self.__shapeBuilder.createLine(arrow2StartX, arrow2StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
+        
+        self.__SVGObject.addElement(arrow1);
+        self.__SVGObject.addElement(arrow2);        
+    
     def prepareNode(self, node, startX, startY):
-        
-        width = self.__conf['frame']['width'];        
-        height = self.__determineContainterHeight(node);
-        self.__containerHeights[node['id']] = height
-        
-        #startX += self.__conf['frame']['padding']
-        #startY += self.__conf['frame']['padding']
-        
-        nodeGroup = g()
-        nodeGroup.set_style(self.__textStyle.getStyle())        
-        
-        
-        self.prepareNodeContainer(startX, startY, width, height, nodeGroup)
-        if node['type'] == 'node':
-            i = 1
-            
-            lines = self.__createLines(node['value'])
-            
-            for line in lines:                
-                if isinstance(line, int):
-                    separatorObj = self.__shapeBuilder.createLine(startX, startY + (i * 15), startX + width, startY + (i * 15), strokewidth=self.__conf['frame']['separator']['width'])
-                    nodeGroup.addElement(separatorObj)
-                elif isinstance(line, list):
-                    txtObj = text(None, startX + self.__conf['frame']['padding'], startY + (i * 15) + self.__conf['frame']['padding']);
-                    
-                    for txt in line:
-                        span = tspan();
-                        span.appendTextContent(txt.getText());
-                        span.setAttribute("style", txt.getStyle())
-                        txtObj.addElement(span)
-                    
-                    nodeGroup.addElement(txtObj)
-                else:
-                    raise Exception("unsupported value type")
-                
-                i += 1
-                
-            self.__SVGObject.addElement(nodeGroup)
-        
-    def prepareNodeContainer(self, startX, startY, width, height, nodeGroup):
-        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth=self.__conf['frame']['thickness'], stroke='black', fill='white')
-        nodeGroup.addElement(rect) 
-        
-    def __determineContainterHeight(self, node):
-        linesNumber = len(self.__createLines(node['value']));
-        #TODO wrapping!
-        return linesNumber * self.__determineLineHeight();
-    
-    def __determineLineHeight(self):
-        return 18;
-    
-    def __createLines(self, values):
-        resolver = BBCodeResolver();
-        
-        result = [];
-        
-        for value in values:
-            if isinstance(value, str):
-                lines = resolver.resolveString(value);
-                if isinstance(lines, list):
-                    for line in lines:
-                        result.append(line);
-            elif isinstance(value, int):
-                result.append(value);
-        
-        return result;
+        container = self.__nodeRenderer.render(node, startX, startY);
+        self.__SVGObject.addElement(container);
+
     
     def __updateFramesOffsets(self):
         pass
