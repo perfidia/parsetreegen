@@ -67,17 +67,22 @@ class NodeRenderer(object):
                 
         return height + 2 * self.__framePadding;
     
-    def __prepareNodeContainer(self, startX, startY, width, height):
+    def __prepareNodeContainer(self, startX, startY, width, height, isReference):
         
         nodeGroup = g()
         nodeGroup.set_style(self.__textStyle.getStyle()) 
         
-        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth = self.__frameThickness, stroke='black', fill='white')
+        if isReference:
+            color = 'gray';
+        else:
+            color = 'white';
+        
+        rect = self.__shapeBuilder.createRect(startX, startY, width, height, strokewidth = self.__frameThickness, stroke='black', fill=color)
         nodeGroup.addElement(rect) 
         
         return nodeGroup;
     
-    def render(self, node, startX, startY):
+    def render(self, node, startX, startY, isReference = False):
         
         if node['type'] != 'node':
             raise Exception("Wrong input object. Expected type: 'node'");
@@ -86,7 +91,7 @@ class NodeRenderer(object):
              
         height = self.__determineContainterHeight(lines);
         
-        nodeContainer = self.__prepareNodeContainer(startX, startY, self.__frameWidth, height)
+        nodeContainer = self.__prepareNodeContainer(startX, startY, self.__frameWidth, height, isReference)
 
         y = startY + self.__framePadding;
 

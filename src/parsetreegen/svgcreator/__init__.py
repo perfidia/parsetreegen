@@ -147,10 +147,13 @@ class SVGTreeCreator:
     
     def prepareNode(self, node, startX, startY):
         
+        isRef = False;
+        
         if node['type'] == 'reference':
             node = self.__findNode(node['value'], self.__rootNode);
+            isRef = True;
             
-        container = self.__nodeRenderer.render(node, startX, startY);
+        container = self.__nodeRenderer.render(node, startX, startY, isRef);
         self.__SVGObject.addElement(container);
 
     def __findNode(self, id, node):
@@ -191,28 +194,27 @@ class SVGTreeCreator:
                 self.__determineFramesPositions(child, level + 1)
     
     def __updateFramesOffsets(self, node, level = 0):
-        if node['type'] == 'node' and node.has_key('children'):
+        if node['type'] == 'node' and (self.__nodeChildrenLen(node) > 0):
                             
             offsetValue = (self.__nodeChildrenLen(node) - 1) * (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) / 2
             nodeEncountered = False
             
             for frameKey in self.__framesPositions[level]:
                 if node['id'] == frameKey:
-                    self.__framesPositions[level][frameKey].x += offsetValue 
+                    self.__framesPositions[level][frameKey].x += offsetValue
                     
                     nodeEncountered = True
                 else:                    
                     if nodeEncountered:
                         self.__framesPositions[level][frameKey].x += offsetValue * 2
-                        
-            if node.has_key('children'):
-                childCounter = 0
-                for child in node['children']:
-                    if child['type'] == 'node':
-                        self.__framesPositions[level + 1][child['id']].x = self.__framesPositions[level][node['id']].x - offsetValue + ((self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * childCounter) 
-                        childCounter += 1
-                for child in node['children']:
-                        self.__updateFramesOffsets(child, level + 1)
+          
+            childCounter = 0
+            for child in node['children']:
+                if child['type'] == 'node':
+                    self.__framesPositions[level + 1][child['id']].x = self.__framesPositions[level][node['id']].x - offsetValue + ((self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * childCounter) 
+                    childCounter += 1
+            for child in node['children']:
+                    self.__updateFramesOffsets(child, level + 1)
     
         
     def determineTreeLevels(self, data, level = 0, result = None):
@@ -267,6 +269,4 @@ class SVGTreeCreator:
                 if child['type'] == 'node' :
                     result += 1
                     
-        return result
-        
-        
+        return result    
