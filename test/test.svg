@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> 
+<svg viewBox = "0 0 800 240" version = "1.1">
+    <defs>
+      <marker id="markerEndArrow"
+      viewBox="0 0 30 30" refX="10" refY="12.5"
+      markerUnits="strokeWidth" markerWidth="9" markerHeight="20"
+      orient="auto">
+      <path style="stroke-width:1;stroke:black;fill:black;opacity:1" d="M0.3125 0.625 9.3125 12.625 0.3125 24.625 21.3125 12.625 Z" />
+      </marker>
+    </defs>
+
+    <line style="marker-end:url(#markerEndArrow);fill:none;stroke:black;stroke-width:4;width:0;stroke-dasharray:8 4 20 4" x1="0" x2="660" y1="0" y2="200"/>
+</svg>

@@ -1,3 +1,9 @@
+nodeL1C1SA666 = {
+		'type': 'reference',
+		'id': 'nodeL1C1SA666',
+		'value': 'root',
+}
+
 nodeL1C1SA2 = {
 		'type': 'node',
 		'id': 'nodeL1C1SA2',
@@ -9,6 +15,7 @@ nodeL1C1SA2 = {
 			'max = \'Z\'',
 			'length = 3'
 		],
+		'children': [nodeL1C1SA666],
 }
 
 nodeL1C1SA1 = {

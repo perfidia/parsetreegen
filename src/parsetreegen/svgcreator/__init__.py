@@ -2,6 +2,7 @@
 
 import math
 
+from pysvg.structure import defs;
 from pysvg.structure import svg
 from pysvg.text import text
 from pysvg.text import tspan
@@ -14,9 +15,12 @@ from parsetreegen.bbcoderesolver.BBCLine import BBCLine
 from ParseTreeGenStructures import FramePosition
 from parsetreegen.renderers.NodeRenderer import NodeRenderer;
 from parsetreegen.renderers.ArrowRenderer import ArrowRenderer;
+from parsetreegen.elements import Marker;
 
 class SVGTreeCreator:
     def __init__(self, conf):
+        self.__ARROW_MARKER_ID = "arrowMarker";
+        
         self.__conf = conf
         
         self.__containerHeights = dict()
@@ -26,14 +30,22 @@ class SVGTreeCreator:
         self.__nodeRenderer = NodeRenderer(conf);
         self.__arrowRenderer = ArrowRenderer(conf);
         
-        self.prepareSVGObject()
-        self.prepareShapeBuilder()
+        self.__prepareSVGObject()
+        self.__prepareShapeBuilder()
+        self.__prepareDefsContainer();
         
-    def prepareSVGObject(self):
+    def __prepareSVGObject(self):
         self.__SVGObject = svg()
         
-    def prepareShapeBuilder(self):
+    def __prepareShapeBuilder(self):
         self.__shapeBuilder = ShapeBuilder()
+        
+    def __prepareDefsContainer(self):
+        self.__defs = defs();
+        
+        self.__defs.addElement(Marker(self.__ARROW_MARKER_ID))
+        
+        self.__SVGObject.addElement(self.__defs);
         
     def prepareXML(self):
         return self.__SVGObject.getXML()
@@ -80,70 +92,69 @@ class SVGTreeCreator:
         endX = endPositionFrame.x + startPositionFrame.width / 2;
         endY = endPositionFrame.y;        
         
-        self.drawConnection(startX, startY, endX, endY, self.__conf['connection'])
+        self.drawConnection(startX, startY, endX, endY, self.__conf['connection'], False)
         
     def prepareRefConnection(self, startNode, endNode):
         startPositionFrame = self.__framesPositionsById[startNode['id']]
         endPositionFrame = self.__framesPositionsById[endNode['id']]
         
-        startX = startPositionFrame.x + startPositionFrame.width / 2;
-        startY = startPositionFrame.y + startPositionFrame.height / 2;
-        endX = endPositionFrame.x + startPositionFrame.width / 2;
-        endY = endPositionFrame.y;        
+        horizontalOffset = math.fabs(endPositionFrame.x - startPositionFrame.x);
+        verticalOffset = math.fabs(endPositionFrame.y - startPositionFrame.y);
         
-        self.drawConnection(startX, startY, endX, endY, self.__conf['connection'])
+        top = endPositionFrame.y < startPositionFrame.y;
+        bottom = not top;
+        left = endPositionFrame.x < startPositionFrame.x;
+        right = not left;
         
-    def drawConnection(self, startX, startY, endX, endY, connectionConf):
-        line = self.__shapeBuilder.createLine(startX, startY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
-        self.__SVGObject.addElement(line);
+        if left and horizontalOffset > verticalOffset:
+            #connect left edges
+            startX = startPositionFrame.x;
+            startY = startPositionFrame.y + startPositionFrame.height / 2;
+            endX = endPositionFrame.x + startPositionFrame.width;
+            endY = endPositionFrame.y + endPositionFrame.height / 2;
+        elif top and verticalOffset > horizontalOffset:
+            startX = startPositionFrame.x + startPositionFrame.width / 2;
+            startY = startPositionFrame.y;
+            endX = endPositionFrame.x + endPositionFrame.width / 2;
+            endY = endPositionFrame.y + endPositionFrame.height;
+        elif right and horizontalOffset > verticalOffset:
+            startX = startPositionFrame.x + startPositionFrame.width;
+            startY = startPositionFrame.y + startPositionFrame.height / 2;
+            endX = endPositionFrame.x;
+            endY = endPositionFrame.y + endPositionFrame.height / 2;
+        elif bottom and verticalOffset > horizontalOffset:
+            startX = startPositionFrame.x + startPositionFrame.width / 2;
+            startY = startPositionFrame.y + startPositionFrame.height;
+            endX = endPositionFrame.x + endPositionFrame.width / 2;
+            endY = endPositionFrame.y; 
         
-        slope = float();
+        self.drawConnection(startX, startY, endX, endY, self.__conf['connection'], True)
         
-        if connectionConf['marker'] == 'small':
-            markerSize = float(25);
-        elif connectionConf['marker'] == 'normal':
-            markerSize = float(50);
-        elif connectionConf['marker'] == 'large':
-            markerSize = float(75); 
+    def drawConnection(self, startX, startY, endX, endY, connectionConf, isReference):
         
-        startX = float(startX)
-        startY = float(startY)
-        endX = float(endX)
-        endY = float(endY)
+        diff = 10;
         
-        if ((endX - startX) != 0) and ((endY - startY) != 0):
-            slope = (endY - startY) / (endX - startX)
-        else:
-            slope = 1.5707
-
-
-        slopeArrow1 = slope + (slope * 0.4)
-        slopeArrow2 = slope - (slope * 0.4)
+        if startX != endX:
+            const = math.fabs(startY - endY) / math.fabs(startX - endX);
+            offsetX = diff / math.sqrt(1 + const * const)
+            offsetY = offsetX * const;
             
-        arrow1MarkerXFactor = markerSize * math.cos(slopeArrow1)
-        arrow1MarkerYFactor = markerSize * math.sin(slopeArrow1)
-        
-        arrow2MarkerXFactor = markerSize * math.cos(slopeArrow2)
-        arrow2MarkerYFactor = markerSize * math.sin(slopeArrow2)
-        
-        if slope < 0:
-            arrow1StartX = endX + arrow1MarkerXFactor
-            arrow2StartX = endX + arrow2MarkerXFactor
-        
-            arrow1StartY = endY + arrow1MarkerYFactor
-            arrow2StartY = endY + arrow2MarkerYFactor
+            if startX < endX:
+                endX = endX - offsetX;
+            else:
+                endX = endX + offsetX;
         else:
-            arrow1StartX = endX - arrow1MarkerXFactor
-            arrow2StartX = endX - arrow2MarkerXFactor
+            offsetY = diff;
+                
+        if startY < endY:
+            endY = endY - offsetY;
+        else:
+            endY = endY + offsetY;
+            
         
-            arrow1StartY = endY - arrow1MarkerYFactor
-            arrow2StartY = endY - arrow2MarkerYFactor
+        line = self.__arrowRenderer.render(startX, startY, endX, endY, self.__ARROW_MARKER_ID, isReference);
         
-        arrow1 = self.__shapeBuilder.createLine(arrow1StartX, arrow1StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black") 
-        arrow2 = self.__shapeBuilder.createLine(arrow2StartX, arrow2StartY, endX, endY, strokewidth=connectionConf['thickness'], stroke="black")
-        
-        self.__SVGObject.addElement(arrow1);
-        self.__SVGObject.addElement(arrow2);        
+        self.__SVGObject.addElement(line); 
     
     def prepareNode(self, node, startX, startY):
         
@@ -193,10 +204,10 @@ class SVGTreeCreator:
             for child in node['children']:
                 self.__determineFramesPositions(child, level + 1)
     
-    def __updateFramesOffsets(self, node, level = 0):
-        if node['type'] == 'node' and (self.__nodeChildrenLen(node) > 0):
+    def __updateFramesOffsets(self, node, parent = None, level = 0):            
+        if  node.has_key('children'):
                             
-            offsetValue = (self.__nodeChildrenLen(node) - 1) * (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) / 2
+            offsetValue = self.__calculateOffset(node)             
             nodeEncountered = False
             
             for frameKey in self.__framesPositions[level]:
@@ -210,13 +221,20 @@ class SVGTreeCreator:
           
             childCounter = 0
             for child in node['children']:
-                if child['type'] == 'node':
-                    self.__framesPositions[level + 1][child['id']].x = self.__framesPositions[level][node['id']].x - offsetValue + ((self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * childCounter) 
-                    childCounter += 1
+                self.__framesPositions[level + 1][child['id']].x = self.__framesPositions[level][node['id']].x - offsetValue + ((self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) * childCounter) 
+                childCounter += 1
             for child in node['children']:
-                    self.__updateFramesOffsets(child, level + 1)
-    
-        
+                self.__updateFramesOffsets(child, node, level + 1)
+                
+    def __calculateOffset(self, node):
+        result = 0
+        if node.has_key('children'):
+            result = (len(node['children']) - 1) * (self.__conf['frame']['width'] + self.__conf['frame']['verticalOffset']) / 2
+            for child in node['children']:
+                result += self.__calculateOffset(child)
+                
+        return result
+                
     def determineTreeLevels(self, data, level = 0, result = None):
         '''
         Grouping nodes according to depth levels. Considering type = 'node', excluding type = 'reference'.

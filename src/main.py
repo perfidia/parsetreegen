@@ -152,5 +152,5 @@ nodeRoot = {
 
 #print nodeRoot
 #print parsetreegen.as_text(nodeRoot)
-root = parsetreegen.read("test.txt");
+root = parsetreegen.read("inputData.txt");
 print '\n\nSVG XML output: \n\n' + parsetreegen.as_svg(root, "testSVG.svg", None)
