@@ -4,361 +4,361 @@
 <path style="stroke-width:1;stroke:black;fill:black;opacity:1" d="M0.3125 0.625 9.3125 12.625 0.3125 24.625 21.3125 12.625 Z"  />
 </marker>
 </defs>
-<line y1="116" x2="659.974586998" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2050" y2="215.2875295"  />
-<line y1="116" x2="1709.61523948" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2050" y2="213.252788721"  />
-<line y1="116" x2="2390.38476052" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2050" y2="213.252788721"  />
-<line y1="116" x2="3090.04504527" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2050" y2="215.051909074"  />
-<line y1="116" x2="3790.01628666" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2050" y2="215.429502095"  />
-<line y1="256" x2="2709.99746971" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="3500" y2="273.775056932"  />
-<line y1="332" x2="309.615239476" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="650" y2="429.252788721"  />
-<line y1="332" x2="990.384760524" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="650" y2="429.252788721"  />
-<line y1="332" x2="2400" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="2400" y2="422"  />
-<line y1="524" x2="1309.77154311" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="2100" y2="695.874689374"  />
-<line y1="533" x2="300" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="300" y2="623"  />
-<line y1="548" x2="1000" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1000" y2="638"  />
-<line y1="749" x2="300" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="300" y2="839"  />
-<line y1="889" x2="1741.8946948" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="600" y2="63.8569640214"  />
-<line y1="749" x2="1000" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1000" y2="854"  />
+<line y1="106" x2="359.922778767" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1150" y2="204.759652654"  />
+<line y1="106" x2="958.94427191" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1150" y2="201.527864045"  />
+<line y1="106" x2="1341.05572809" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1150" y2="201.527864045"  />
+<line y1="106" x2="1740.13606076" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1150" y2="204.356010127"  />
+<line y1="106" x2="2140.0496281" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1150" y2="205.00496281"  />
+<line y1="241" x2="1509.99352629" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="2000" y2="258.640233053"  />
+<line y1="312" x2="158.94427191" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="350" y2="407.527864045"  />
+<line y1="312" x2="541.05572809" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="350" y2="407.527864045"  />
+<line y1="312" x2="1350" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="1350" y2="402"  />
+<line y1="499" x2="709.501926426" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="1200" y2="659.883368132"  />
+<line y1="503" x2="150" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="150" y2="593"  />
+<line y1="518" x2="550" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="550" y2="608"  />
+<line y1="709" x2="150" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="150" y2="799"  />
+<line y1="844" x2="993.37283137" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;stroke-dasharray:8 4 20 4;" x1="300" y2="60.4887005517"  />
+<line y1="709" x2="550" style="marker-end:url(#arrowMarker);fill:none;stroke:black;stroke-width:2;width:3;" x1="550" y2="814"  />
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="0" x="1750"  />
-<text y="20" x="1760"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="0" x="1000"  />
+<text y="15" x="1005"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="35" x="1760"  >
+<text y="30" x="1005"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Concat</tspan>
 </text>
-<line y1="40" x2="2350" style="stroke:black; stroke-width:1; " x1="1750" y2="40"  />
-<text y="56" x="1760"  >
+<line y1="35" x2="1300" style="stroke:black; stroke-width:1; " x1="1000" y2="35"  />
+<text y="51" x="1005"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="71" x="1760"  >
+<text y="66" x="1005"  >
 <tspan style="color: #7;"  >
 name="ElementID"</tspan>
 </text>
-<text y="86" x="1760"  >
+<text y="81" x="1005"  >
 <tspan style="color: #7;"  >
 duplicated=false</tspan>
 </text>
-<text y="101" x="1760"  >
+<text y="96" x="1005"  >
 <tspan style="color: #7;"  >
 length=9</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="216" x="350"  />
-<text y="236" x="360"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="206" x="200"  />
+<text y="221" x="205"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="251" x="360"  >
+<text y="236" x="205"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Concat</tspan>
 </text>
-<line y1="256" x2="950" style="stroke:black; stroke-width:1; " x1="350" y2="256"  />
-<text y="272" x="360"  >
+<line y1="241" x2="500" style="stroke:black; stroke-width:1; " x1="200" y2="241"  />
+<text y="257" x="205"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="287" x="360"  >
+<text y="272" x="205"  >
 <tspan style="color: #7;"  >
 name="ElementType"</tspan>
 </text>
-<text y="302" x="360"  >
+<text y="287" x="205"  >
 <tspan style="color: #7;"  >
 duplicated=false</tspan>
 </text>
-<text y="317" x="360"  >
+<text y="302" x="205"  >
 <tspan style="color: #7;"  >
 length=11</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="216" x="1400"  />
-<text y="236" x="1410"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="91" width="300" y="206" x="800"  />
+<text y="221" x="805"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="251" x="1410"  >
+<text y="236" x="805"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Char</tspan>
 </text>
-<line y1="256" x2="2000" style="stroke:black; stroke-width:1; " x1="1400" y2="256"  />
-<text y="272" x="1410"  >
+<line y1="241" x2="1100" style="stroke:black; stroke-width:1; " x1="800" y2="241"  />
+<text y="257" x="805"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="287" x="1410"  >
+<text y="272" x="805"  >
 <tspan style="color: #7;"  >
 value='-'</tspan>
 </text>
-<text y="302" x="1410"  >
+<text y="287" x="805"  >
 <tspan style="color: #7;"  >
 length=1</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="216" x="2100"  />
-<text y="236" x="2110"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="206" x="1200"  />
+<text y="221" x="1205"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="251" x="2110"  >
+<text y="236" x="1205"  >
 <tspan style="font-weight: bold; color: #7;"  >
 ExactQuantity</tspan>
 </text>
-<line y1="256" x2="2700" style="stroke:black; stroke-width:1; " x1="2100" y2="256"  />
-<text y="272" x="2110"  >
+<line y1="241" x2="1500" style="stroke:black; stroke-width:1; " x1="1200" y2="241"  />
+<text y="257" x="1205"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="287" x="2110"  >
+<text y="272" x="1205"  >
 <tspan style="color: #7;"  >
 value=5</tspan>
 </text>
-<text y="302" x="2110"  >
+<text y="287" x="1205"  >
 <tspan style="color: #7;"  >
 duplicated=true</tspan>
 </text>
-<text y="317" x="2110"  >
+<text y="302" x="1205"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="216" x="2800"  />
-<text y="236" x="2810"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="91" width="300" y="206" x="1600"  />
+<text y="221" x="1605"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="251" x="2810"  >
+<text y="236" x="1605"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Char</tspan>
 </text>
-<line y1="256" x2="3400" style="stroke:black; stroke-width:1; " x1="2800" y2="256"  />
-<text y="272" x="2810"  >
+<line y1="241" x2="1900" style="stroke:black; stroke-width:1; " x1="1600" y2="241"  />
+<text y="257" x="1605"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="287" x="2810"  >
+<text y="272" x="1605"  >
 <tspan style="color: #7;"  >
 value='-'</tspan>
 </text>
-<text y="302" x="2810"  >
+<text y="287" x="1605"  >
 <tspan style="color: #7;"  >
 length=1</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:gray; " height="116" width="600" y="216" x="3500"  />
-<text y="236" x="3510"  >
+<rect style="stroke:black; stroke-width:2; fill:gray; " height="106" width="300" y="206" x="2000"  />
+<text y="221" x="2005"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="251" x="3510"  >
+<text y="236" x="2005"  >
 <tspan style="font-weight: bold; color: #7;"  >
 ExactQuantity</tspan>
 </text>
-<line y1="256" x2="4100" style="stroke:black; stroke-width:1; " x1="3500" y2="256"  />
-<text y="272" x="3510"  >
+<line y1="241" x2="2300" style="stroke:black; stroke-width:1; " x1="2000" y2="241"  />
+<text y="257" x="2005"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="287" x="3510"  >
+<text y="272" x="2005"  >
 <tspan style="color: #7;"  >
 value=5</tspan>
 </text>
-<text y="302" x="3510"  >
+<text y="287" x="2005"  >
 <tspan style="color: #7;"  >
 duplicated=true</tspan>
 </text>
-<text y="317" x="3510"  >
+<text y="302" x="2005"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="432" x="0"  />
-<text y="452" x="10"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="91" width="300" y="412" x="0"  />
+<text y="427" x="5"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="467" x="10"  >
+<text y="442" x="5"  >
 <tspan style="font-weight: bold; color: #7;"  >
 InCharClass</tspan>
 </text>
-<line y1="472" x2="600" style="stroke:black; stroke-width:1; " x1="0" y2="472"  />
-<text y="488" x="10"  >
+<line y1="447" x2="300" style="stroke:black; stroke-width:1; " x1="0" y2="447"  />
+<text y="463" x="5"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="503" x="10"  >
+<text y="478" x="5"  >
 <tspan style="color: #7;"  >
 duplicated=false</tspan>
 </text>
-<text y="518" x="10"  >
+<text y="493" x="5"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="432" x="700"  />
-<text y="452" x="710"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="412" x="400"  />
+<text y="427" x="405"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="467" x="710"  >
+<text y="442" x="405"  >
 <tspan style="font-weight: bold; color: #7;"  >
 ExactQuantity</tspan>
 </text>
-<line y1="472" x2="1300" style="stroke:black; stroke-width:1; " x1="700" y2="472"  />
-<text y="488" x="710"  >
+<line y1="447" x2="700" style="stroke:black; stroke-width:1; " x1="400" y2="447"  />
+<text y="463" x="405"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="503" x="710"  >
+<text y="478" x="405"  >
 <tspan style="color: #7;"  >
 value=2</tspan>
 </text>
-<text y="518" x="710"  >
+<text y="493" x="405"  >
 <tspan style="color: #7;"  >
 duplicated=false</tspan>
 </text>
-<text y="533" x="710"  >
+<text y="508" x="405"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:gray; " height="101" width="600" y="432" x="2100"  />
-<text y="452" x="2110"  >
+<rect style="stroke:black; stroke-width:2; fill:gray; " height="91" width="300" y="412" x="1200"  />
+<text y="427" x="1205"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="467" x="2110"  >
+<text y="442" x="1205"  >
 <tspan style="font-weight: bold; color: #7;"  >
 InCharClass</tspan>
 </text>
-<line y1="472" x2="2700" style="stroke:black; stroke-width:1; " x1="2100" y2="472"  />
-<text y="488" x="2110"  >
+<line y1="447" x2="1500" style="stroke:black; stroke-width:1; " x1="1200" y2="447"  />
+<text y="463" x="1205"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="503" x="2110"  >
+<text y="478" x="1205"  >
 <tspan style="color: #7;"  >
 duplicated=true</tspan>
 </text>
-<text y="518" x="2110"  >
+<text y="493" x="1205"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="633" x="0"  />
-<text y="653" x="10"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="603" x="0"  />
+<text y="618" x="5"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="668" x="10"  >
+<text y="633" x="5"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Range</tspan>
 </text>
-<line y1="673" x2="600" style="stroke:black; stroke-width:1; " x1="0" y2="673"  />
-<text y="689" x="10"  >
+<line y1="638" x2="300" style="stroke:black; stroke-width:1; " x1="0" y2="638"  />
+<text y="654" x="5"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="704" x="10"  >
+<text y="669" x="5"  >
 <tspan style="color: #7;"  >
 min='A'</tspan>
 </text>
-<text y="719" x="10"  >
+<text y="684" x="5"  >
 <tspan style="color: #7;"  >
 max='Z'</tspan>
 </text>
-<text y="734" x="10"  >
+<text y="699" x="5"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="101" width="600" y="648" x="700"  />
-<text y="668" x="710"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="91" width="300" y="618" x="400"  />
+<text y="633" x="405"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="683" x="710"  >
+<text y="648" x="405"  >
 <tspan style="font-weight: bold; color: #7;"  >
 InCharClass</tspan>
 </text>
-<line y1="688" x2="1300" style="stroke:black; stroke-width:1; " x1="700" y2="688"  />
-<text y="704" x="710"  >
+<line y1="653" x2="700" style="stroke:black; stroke-width:1; " x1="400" y2="653"  />
+<text y="669" x="405"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="719" x="710"  >
+<text y="684" x="405"  >
 <tspan style="color: #7;"  >
 duplicated=true</tspan>
 </text>
-<text y="734" x="710"  >
+<text y="699" x="405"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:gray; " height="116" width="600" y="849" x="0"  />
-<text y="869" x="10"  >
+<rect style="stroke:black; stroke-width:2; fill:gray; " height="106" width="300" y="809" x="0"  />
+<text y="824" x="5"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="884" x="10"  >
+<text y="839" x="5"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Concat</tspan>
 </text>
-<line y1="889" x2="600" style="stroke:black; stroke-width:1; " x1="0" y2="889"  />
-<text y="905" x="10"  >
+<line y1="844" x2="300" style="stroke:black; stroke-width:1; " x1="0" y2="844"  />
+<text y="860" x="5"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="920" x="10"  >
+<text y="875" x="5"  >
 <tspan style="color: #7;"  >
 name="ElementID"</tspan>
 </text>
-<text y="935" x="10"  >
+<text y="890" x="5"  >
 <tspan style="color: #7;"  >
 duplicated=false</tspan>
 </text>
-<text y="950" x="10"  >
+<text y="905" x="5"  >
 <tspan style="color: #7;"  >
 length=9</tspan>
 </text>
 </g>
 <g style="font-size:10px; font-family:Arial; "  >
-<rect style="stroke:black; stroke-width:1; fill:white; " height="116" width="600" y="864" x="700"  />
-<text y="884" x="710"  >
+<rect style="stroke:black; stroke-width:2; fill:white; " height="106" width="300" y="824" x="400"  />
+<text y="839" x="405"  >
 <tspan style="color: #7;"  >
 Nodetype:</tspan>
 </text>
-<text y="899" x="710"  >
+<text y="854" x="405"  >
 <tspan style="font-weight: bold; color: #7;"  >
 Range</tspan>
 </text>
-<line y1="904" x2="1300" style="stroke:black; stroke-width:1; " x1="700" y2="904"  />
-<text y="920" x="710"  >
+<line y1="859" x2="700" style="stroke:black; stroke-width:1; " x1="400" y2="859"  />
+<text y="875" x="405"  >
 <tspan style="color: #7;"  >
 Attribute(s):</tspan>
 </text>
-<text y="935" x="710"  >
+<text y="890" x="405"  >
 <tspan style="color: #7;"  >
 min=0</tspan>
 </text>
-<text y="950" x="710"  >
+<text y="905" x="405"  >
 <tspan style="color: #7;"  >
 max=9</tspan>
 </text>
-<text y="965" x="710"  >
+<text y="920" x="405"  >
 <tspan style="color: #7;"  >
 length=3</tspan>
 </text>

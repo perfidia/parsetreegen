@@ -23,9 +23,9 @@ import re;
 defaultConf = {
 		# jednosta jest px
 		'frame': {              # ramka zawierajaca tekst
-			'thickness': 1,     # grubosc ramki
-			'padding': 10,      # odstep pomiedzy ramka i tekstem
-			'width': 600,       # szerokosc ramki
+			'thickness': 2,     # grubosc ramki
+			'padding': 5,      # odstep pomiedzy ramka i tekstem
+			'width': 300,       # szerokosc ramki
 			'horizontalOffset': 100, # odstep miedzy ramkami w pionie
 			'verticalOffset': 100, # odstep miedzy ramkami w poziomie
 			'separator': {      # seperator w ramce

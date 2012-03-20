@@ -32,4 +32,4 @@ See AUTHORS file.
 Licence
 -------
 
-TBD
+X11
