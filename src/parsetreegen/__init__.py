@@ -26,20 +26,20 @@ defaultConf = {
 			'thickness': 2,     # grubosc ramki
 			'padding': 5,      # odstep pomiedzy ramka i tekstem
 			'width': 300,       # szerokosc ramki
-			'horizontalOffset': 100, # odstep miedzy ramkami w pionie
-			'verticalOffset': 100, # odstep miedzy ramkami w poziomie
+			'horizontalOffset': 50, # odstep miedzy ramkami w pionie
+			'verticalOffset': 50, # odstep miedzy ramkami w poziomie
 			'separator': {      # seperator w ramce
 				'width': 1,     # grubość linni
 			},
 			'font': {                 # czcionka
 				'name': 'Arial',      # rodzaj czcionki
 				'size': 10,           # rozmiar czcionki
-				'align': 'justified', # left, right, justified
+				'align': 'justified', # left, right, justified ... UNSUPPORTED
 			},
 		},
 		'connection': {         # polaczenie pomiedzy ramkami
 			'thickness': 2,         # grubosc linii
-			'marker': 'normal', # rodzaj grotu: small, normal, large
+			'marker': 'normal', # rodzaj grotu: small, normal, large .. UNSUPPORTED
 			'style':  'straight', # pattern linii przerywanej: straight, dashed, dotted
 		},
 		'reference': {          # referencja do innej ramki
@@ -50,7 +50,6 @@ defaultConf = {
 }
 
 def read(filename):
-	
 	'''
 	Read file and return data representation
 
@@ -58,49 +57,47 @@ def read(filename):
 
 	@return: data representation
 	'''
-	
+
 	file = open(filename, 'rb')
 	fileContent = file.read();
 	fileContent = re.sub("#.*\n", "", fileContent);
 	fileContent = re.sub("\s", "", fileContent);
 	nodes = re.findall("\w+\s*=\s*{.*?}", fileContent);
 	file.close()
-	
+
 	replacements = dict();
-	
+
 	for node in nodes:
 		match = re.search("\w+", node);
 		nodeName = match.string[match.start():match.end()];
-		
+
 		match = re.search("{.*?}", node)
 		nodeContent = match.string[match.start():match.end()];
-		
+
 		match = re.search("'children':\[.*?\]", nodeContent);
-		
+
 		if match != None:
 			childrenSection = match.string[match.start():match.end()];
-			
+
 			for key in replacements.iterkeys():
 				if re.match(".*" + key + ".*", childrenSection):
 					replacements[key]['child'] = True;
 				childrenSection = re.sub(key, "replacements['" + key + "']['node']", childrenSection);
-			
+
 			nodeContent = re.sub("'children':\[.*?\]", childrenSection, nodeContent);
-			
-			
-		
+
 		n = eval(nodeContent);
-		
+
 		replacements[nodeName] = dict();
 		replacements[nodeName]['child'] = False;
 		replacements[nodeName]['node'] = n
 
 	file.close();
-	
+
 	for value in replacements.itervalues():
 		if not value['child']:
 			return value['node'];
-		
+
 	raise Exception("Did not find root node");
 
 def as_svg(data, filename = None, conf = None):
@@ -118,11 +115,11 @@ def as_svg(data, filename = None, conf = None):
 	else:
 		svgCreator = svgcreator.SVGTreeCreator(defaultConf)
 	svgCreator.prepareTree(data)
-#	svgCreator.determineFramesPositions(data)
+	# svgCreator.determineFramesPositions(data)
 	if filename != None:
 		svgCreator.createSVGFile(filename)
-	
-	return svgCreator.prepareXML()				
+
+	return svgCreator.prepareXML()
 
 def __partial(data, indent, nodes):
 	result = ''
