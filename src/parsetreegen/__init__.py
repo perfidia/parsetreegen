@@ -22,14 +22,14 @@ import re;
 
 defaultConf = {
 		# jednosta jest px
-		'frame': {              # ramka zawierajaca tekst
-			'thickness': 2,     # grubosc ramki
-			'padding': 5,      # odstep pomiedzy ramka i tekstem
-			'width': 300,       # szerokosc ramki
+		'frame': {                  # ramka zawierajaca tekst
+			'thickness': 2,         # grubosc ramki
+			'padding': 5,           # odstep pomiedzy ramka i tekstem
+			'width': 300,           # szerokosc ramki
 			'horizontalOffset': 50, # odstep miedzy ramkami w pionie
-			'verticalOffset': 50, # odstep miedzy ramkami w poziomie
-			'separator': {      # seperator w ramce
-				'width': 1,     # grubość linni
+			'verticalOffset': 50,   # odstep miedzy ramkami w poziomie
+			'separator': {          # seperator w ramce
+				'width': 1,         # grubość linni
 			},
 			'font': {                 # czcionka
 				'name': 'Arial',      # rodzaj czcionki
@@ -53,9 +53,9 @@ def read(filename):
 	'''
 	Read file and return data representation
 
-	@param filename: file with a data for a parse tree (similar to json)
+	@param filename file with a data for a parse tree (similar to json)
 
-	@return: data representation
+	@return data representation
 	'''
 
 	file = open(filename, 'rb')
@@ -104,16 +104,17 @@ def as_svg(data, filename = None, conf = None):
 	'''
 	Generate svg image for provided data
 
-	@param data: data representation
-	@param filename: place where to store the image; if None then do not save anything
-	@param conf: configuration
+	@param data data representation
+	@param filename place where to store the image; if None then do not save anything
+	@param conf configuration
 
-	@return: SVG representation of file
+	@return SVG representation of file
 	'''
 	if conf != None:
 		svgCreator = svgcreator.SVGTreeCreator(conf)
 	else:
 		svgCreator = svgcreator.SVGTreeCreator(defaultConf)
+
 	svgCreator.prepareTree(data)
 	# svgCreator.determineFramesPositions(data)
 	if filename != None:
@@ -154,9 +155,9 @@ def as_text(data):
 	'''
 	Pretty print
 
-	@param data: input data
+	@param data input data
 
-	@return: string
+	@return string
 	'''
 
 	return __partial(data, 0, {})

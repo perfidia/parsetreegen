@@ -184,8 +184,6 @@ class BBCodeResolver:
 
         return texts;
 
-
-
     def __toBBCText(self, string, types, color):
         isBold = False;
         isItalic = False;
@@ -203,8 +201,6 @@ class BBCodeResolver:
             isUnderline = True;
 
         return BBCText(isBold, isItalic, isStrike, isUnderline, color, string);
-
-
 
     def __resolveColor(self, color):
         if color != None:
@@ -227,16 +223,16 @@ class BBCodeResolver:
     def __resolveMappingType(self, mapping):
         return re.sub("{\$[0-9]+", "", mapping)[0];
 
-    '''
-    Replacements for BBCode tags.
-
-    For example:
-    "[s]Foo [b]bar[/b][/s]" would create
-    "[s]Foo {$1b}[/s]", where {$1b} is replacement for
-        "[b]bar[/b]".
-    '''
     def __createNewReplacement(self, flag):
+        '''
+		Replacements for BBCode tags.
+
+		For example:
+		"[s]Foo [b]bar[/b][/s]" would create
+		"[s]Foo {$1b}[/s]", where {$1b} is replacement for
+			"[b]bar[/b]".
+		'''
+
         result = "{$" + str(self.__mappingIndex) + flag + "}";
         self.__mappingIndex = self.__mappingIndex + 1;
         return result;
-
