@@ -1,0 +1,7 @@
+TODO
+====
+
+* auto width
+* make it prettier (see drawing.svg in docs)
+* text wrapping
+

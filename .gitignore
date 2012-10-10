@@ -9,3 +9,5 @@ dist
 build
 
 *.svg
+
+/docs/_build
