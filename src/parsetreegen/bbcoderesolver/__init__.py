@@ -62,7 +62,6 @@ class BBCodeColor(BBCodeTag):
         return self.getCloseTag();
 
 class BBCodeResolver:
-
     def __init__(self):
         self.__mapping = dict();
         self.__mappingIndex = 1;
@@ -74,8 +73,7 @@ class BBCodeResolver:
         self.__COLOR_FLAG = 'c=';
 
     def resolveString(self, text):
-
-        if isinstance(text, str):
+        if type(text) in [str, unicode]:
             lines = text.split("[br]");
             convertedLines = [];
 
@@ -225,13 +223,13 @@ class BBCodeResolver:
 
     def __createNewReplacement(self, flag):
         '''
-		Replacements for BBCode tags.
-
-		For example:
-		"[s]Foo [b]bar[/b][/s]" would create
-		"[s]Foo {$1b}[/s]", where {$1b} is replacement for
-			"[b]bar[/b]".
-		'''
+        Replacements for BBCode tags.
+    
+        For example:
+        "[s]Foo [b]bar[/b][/s]" would create
+        "[s]Foo {$1b}[/s]", where {$1b} is replacement for
+        "[b]bar[/b]".
+        '''
 
         result = "{$" + str(self.__mappingIndex) + flag + "}";
         self.__mappingIndex = self.__mappingIndex + 1;

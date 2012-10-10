@@ -31,20 +31,23 @@ class NodeRenderer(object):
         self.__textStyle.setFontSize(self.__fontSize.__str__() + 'px')
 
         self.__LINE_SEPARATOR = 5;
+        
+        self.__resolver = BBCodeResolver();
 
     def __createLines(self, values):
-        resolver = BBCodeResolver();
-
         result = [];
 
         for value in values:
-            if isinstance(value, str):
-                lines = resolver.resolveString(value);
+            if type(value) in [str, unicode]:
+                lines = self.__resolver.resolveString(value);
+                
                 if isinstance(lines, list):
                     for line in lines:
                         result.append(line);
             elif isinstance(value, int):
                 result.append(value);
+            else:
+                assert 1 == 2
 
         return result;
 
@@ -68,7 +71,6 @@ class NodeRenderer(object):
         return height + 2 * self.__framePadding;
 
     def __prepareNodeContainer(self, startX, startY, width, height, isReference):
-
         nodeGroup = g()
         nodeGroup.set_style(self.__textStyle.getStyle())
 
@@ -83,7 +85,6 @@ class NodeRenderer(object):
         return nodeGroup;
 
     def render(self, node, startX, startY, isReference = False):
-
         if node['type'] != 'node':
             raise Exception("Wrong input object. Expected type: 'node'");
 
@@ -96,18 +97,14 @@ class NodeRenderer(object):
         y = startY + self.__framePadding;
 
         for line in lines:
-
             if isinstance(line, int): # if int, then render horizontal line
-
                 lineHeight = self.__determineLineHeight(True);
                 x = startX;
 
                 separatorObj = self.__shapeBuilder.createLine(x, y, x + self.__frameWidth, y, strokewidth = self.__separatorWidth)
                 nodeContainer.addElement(separatorObj)
 
-
             elif isinstance(line, list): #list, because line is list of bbcoded spans
-
                 lineHeight = self.__determineLineHeight(False);
                 x = startX + self.__framePadding;
 

@@ -4,7 +4,7 @@ Parse Tree Generator
 Description
 -----------
 
-TODO
+Tool for generation parse trees in svg format.
 
 Installation
 ------------
@@ -22,14 +22,17 @@ Installation
 Getting started
 ---------------
 
-TBD
+See main.py file.
 
 Authors
 -------
 
 See AUTHORS file.
 
-Licence
+License
 -------
 
-X11
+Parse Tree Generator is released under The MIT License. See LICENSE file.
+
+The first commits were using *X11* term to describe license, since this was
+unambiguous the license was defined as MIT License.

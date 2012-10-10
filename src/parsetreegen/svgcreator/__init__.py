@@ -157,7 +157,6 @@ class SVGTreeCreator:
         self.__SVGObject.addElement(line);
 
     def prepareNode(self, node, startX, startY):
-
         isRef = False;
 
         if node['type'] == 'reference':
@@ -177,7 +176,6 @@ class SVGTreeCreator:
                     if found != None:
                         return found;
         return None;
-
 
     def __determineFramesPositions(self, node, level = 0):
         '''
@@ -262,6 +260,7 @@ class SVGTreeCreator:
     def prepareTree(self, rootNode):
         self.__rootNode = rootNode;
         treeLevels = self.determineTreeLevels(rootNode)
+
         self.__determineFramesPositions(rootNode)
         self.__updateFramesOffsets(rootNode)
         self.prepareConnectionsLevels(treeLevels)
