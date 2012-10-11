@@ -150,12 +150,13 @@ data = {
     'children': [nodeL1C1, nodeL1C2, nodeL1C3, nodeL1C4, nodeL1C5],
 }
 
-#print data
-#print parsetreegen.to_text(data)
-
 filename = "01-example"
 filename = "02-example"
+filename = "03-example"
 
 data = parsetreegen.read("../data/" + filename + ".txt")
+
+#print parsetreegen.to_text(data)
+
 output = parsetreegen.to_svg(data, "../data/" + filename + ".svg", None)
 #print output
