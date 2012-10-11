@@ -38,7 +38,7 @@ class NodeRenderer(object):
         result = [];
 
         for value in values:
-            if type(value) in [str, unicode]:
+            if isinstance(value, basestring):
                 lines = self.__resolver.resolveString(value);
                 
                 if isinstance(lines, list):
