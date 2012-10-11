@@ -116,6 +116,7 @@ def to_svg(data, filename=None, conf=None):
 
     @return SVG representation of file
     '''
+    
     if conf != None:
         svgCreator = svgcreator.SVGTreeCreator(conf)
     else:
@@ -139,7 +140,7 @@ def __partial(data, indent, nodes):
         for line in data['value']:
             if isinstance(line, int):
                 result += spacing + '-' * 10 + '\n'
-            elif isinstance(line, str):
+            elif isinstance(line, basestring):
                 result += spacing + line + '\n'
             else:
                 raise Exception("unsupported value type")

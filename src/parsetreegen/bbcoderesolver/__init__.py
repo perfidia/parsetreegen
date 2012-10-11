@@ -73,7 +73,7 @@ class BBCodeResolver:
         self.__COLOR_FLAG = 'c=';
 
     def resolveString(self, text):
-        if type(text) in [str, unicode]:
+        if isinstance(text, basestring):
             lines = text.split("[br]");
             convertedLines = [];
 
