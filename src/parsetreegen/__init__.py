@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 
-'''
+__all__ = ["defaultConf", "read", "to_svg", "to_text"]
+
+'''Parse Tree Generator
+
 Created on Apr 29, 2011
 
 @author: Bartosz Achimowicz
 
-BBCODE:
-Znacznik	Opis	Przykład
-[b]	tekst pogrubiony	[b]przykład[/b]
-[i]	tekst pochyły	[i]przykład[/i]
-[s]	tekst przekreślony	[s]przykład[/s]
-[u]	tekst podkreślony	[u]przykład[/u]
-[color=red]	kolorowy tekst 	[color=red]czerwony przykład[/color]
-
-[br] new line
-
+Supported BBCODEs:
+Tag         Description   Example
+[b]	        bold          [b]example[/b]
+[i]	        italic        [i]example[/i]
+[s]         strikethrough [s]example[/s]
+[u]	        underline     [u]example[/u]
+[color=red]	color         [color=red]red example[/color]
+[br]        new line
 '''
 
 import re
@@ -22,6 +23,7 @@ import json
 
 import svgcreator
 
+# Default configuration for the generator
 defaultConf = {
         # jednosta jest px
         'frame': {                    # ramka zawierajaca tekst
@@ -53,24 +55,27 @@ defaultConf = {
 }
 
 def read(filename):
-    '''
-    Read file and return data representation
+    '''Read file and return data representation
 
     @param filename file with a data for a parse tree (similar to json)
 
     @return data representation
     '''
 
-    file = open(filename, 'rb')
-    fileContent = file.read();
-    fileContent = re.sub("#.*\n", "", fileContent);
-    fileContent = re.sub("\s", "", fileContent);
-    nodes = re.findall("\w+\s*=\s*{.*?}", fileContent);
-    file.close()
+    fd = open(filename, 'rb')
+    data = fd.read();
+    data = re.sub("#.*\n", "", data);
+    data = re.sub("\s", "", data);
+    nodes = re.findall("\w+\s*=\s*{.*?}", data);
+    fd.close()
 
     replacements = dict();
 
-    # for file with defined nodes
+    # There are two type of input files:
+    # - with defined nodes
+    # - plain json file
+    
+    # handle file with defined nodes
     for node in nodes:
         match = re.search("\w+", node);
         nodeName = match.string[match.start():match.end()];
@@ -100,15 +105,14 @@ def read(filename):
         if not value['child']:
             return value['node'];
 
-    # for file without nodes, plain json
+    # handle plain json
     if len(nodes) == 0:
-        return json.loads(fileContent)
+        return json.loads(data)
 
     raise Exception("Did not find root node");
 
 def to_svg(data, filename=None, conf=None):
-    '''
-    Generate svg image for provided data
+    '''Generate svg image for provided data
 
     @param data data representation
     @param filename place where to store the image; if None then do not save anything
@@ -159,8 +163,7 @@ def __partial(data, indent, nodes):
     return result
 
 def to_text(data):
-    '''
-    Pretty print
+    '''Pretty print
 
     @param data input data
 
