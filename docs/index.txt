@@ -6,9 +6,8 @@ Parse Tree Generator is a simple tool to generate parse trees.
 Contents:
 
 .. toctree::
-	:maxdepth: 2
+    :maxdepth: 2
 
-	overview
-	installation
-	todo
-
+    overview
+    installation
+    todo

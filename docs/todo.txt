@@ -1,8 +1,10 @@
 TODO
 ====
 
-* auto width
+* auto width (changes in conf requried)
 * make it prettier (see drawing.svg in docs)
 * text wrapping
 * do not remove spaces from an input file
 * check imports
+* more examples
+* example how to use parsetreegen in docs 
