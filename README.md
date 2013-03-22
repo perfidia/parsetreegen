@@ -4,7 +4,7 @@ Parse Tree Generator
 Description
 -----------
 
-Tool for generation parse trees in svg format.
+Simple and small tool that allows everyone to generate syntax diagrams in SVG format.
 
 Installation
 ------------
