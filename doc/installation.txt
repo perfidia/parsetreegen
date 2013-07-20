@@ -5,9 +5,9 @@ The following libraries are required:
 
     * python 2.7
     * python-setuptools (deb)
-    * pysvg-0.2.1-py2.7.egg (easy_install)
+    * pysvg-0.2.1-py2.7.egg (easy_install) # works only with 0.2.1
 
         .. code-block:: bash
 
-            easy_install pysvg
+            easy_install pysvg==0.2.1
 
